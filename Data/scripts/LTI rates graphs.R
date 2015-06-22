@@ -9,8 +9,7 @@ data$year <- paste(substr(data[,1], 1, 4))
 data$month <- paste(substr(data[,1], 5, 7))
 data$month <- paste(match(tolower(data$month), tolower(month.abb)))
 
-data2 <- data.frame
 
-
-
-data$dates <- as.Date(paste(data$date), format = "%Y%b")
+#Neither of these lines work. Both produce NA.
+data$dates <- as.Date(paste(data$year,"-",data$month,"-01"), format = "%Y-%m-%d")
+data$dates2 <- as.Date(paste(data$date), format = "%Y%b")
