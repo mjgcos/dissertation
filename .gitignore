@@ -12,6 +12,6 @@ proposal/
 *.toc
 
 
-*.Rhistory
+*/.Rhistory
 Data/csv/.Rhistory
 .Rhistory
