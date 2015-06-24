@@ -7,6 +7,7 @@ require(dplyr)
 require(plyr)
 require(scales) #for percentage point scales
 require(chron)
+require(manipulate) # for checkbox/picker.
 
 setwd("~/Academic/SGPE/Dissertation/Data/csv/")
 
@@ -21,13 +22,29 @@ df <- data %>%
 
 levels(df$country) <- c("AT", "BE", "CY", "DE", "ES", "FI", "FR", "UK", "GR", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PT", "SI", "SK")
 df$date <- as.chron(df$date)
+df$date <- as.Date(df$date, format="%m/%d/%y")
 
 #Graphs
 b1 <- ggplot(data=df,
-             aes(date, yield, colour=country, linetype=country, size=country)) +
+             aes(date, yield/100, colour=country, linetype=country, size=country)) +
   geom_line() +
-  scale_y_continuous() +
-  scale_size_manual(values=c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)) +
+  scale_y_continuous(labels = percent_format()) +
+  scale_size_manual(values=c(rep.int(1, 19))) +
   scale_linetype_manual(values=c(rep.int(1, 19))) +
   ylab("European Long Term Bond Yields (ECB)") + 
   theme_bw()
+
+#NOTES: Great convergence in 1990s, great divergence in 2010s.
+#Find pre-ECB data to see extent of convergence.
+
+
+#For greater simplicity of selection, impose filter for countries
+b2 <- ggplot(data=df,
+             aes(date, yield/100, colour=country, linetype=country, size=country)) +
+  geom_line() +
+  scale_y_continuous(labels = percent_format()) +
+  scale_size_manual(values=c(rep.int(1, 19))) +
+  scale_linetype_manual(values=c(rep.int(1, 19))) +
+  ylab("European Long Term Bond Yields (ECB)") + 
+  theme_bw()
+
