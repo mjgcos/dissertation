@@ -39,12 +39,21 @@ b1 <- ggplot(data=df,
 
 
 #For greater simplicity of selection, impose filter for countries
-b2 <- ggplot(data=df,
-             aes(date, yield/100, colour=country, linetype=country, size=country)) +
+b2 <- function(cy){
+  subdf <- subset(df, country == cy)
+  ggplot(subdf,
+             aes(x=date, y=(yield/100), colour=country, linetype=country, size=country)) +
   geom_line() +
   scale_y_continuous(labels = percent_format()) +
-  scale_size_manual(values=c(rep.int(1, 19))) +
-  scale_linetype_manual(values=c(rep.int(1, 19))) +
+  #scale_size_manual(values=c(rep.int(1, 19))) +
+  #scale_linetype_manual(values=c(rep.int(1, 19))) +
   ylab("European Long Term Bond Yields (ECB)") + 
   theme_bw()
+}
+x <- as.list(as.character(unique(df$country)))
 
+graph <- manipulate (b2(cy), cy = picker(x, label = "Country"))
+#Lehman Bros collapse: 15 Sep 2008. (wiki)
+#Greece: 20 Oct 2009 - defecit revelation. Dec 2009 ratings agencies downgrade (A1 to A2)
+#9 Feb 2010 first austerity package. 3 March second package. April - more downgrades
+#2 May 2010 bailout. 5 May general strike.
