@@ -24,6 +24,9 @@ levels(df$country) <- c("AT", "BE", "CY", "DE", "ES", "FI", "FR", "UK", "GR", "I
 df$date <- as.chron(df$date)
 df$date <- as.Date(df$date, format="%m/%d/%y")
 
+#save manipulations
+#write.csv(df, "ecb_lti_clean.csv", row.names = FALSE)
+
 #Graphs
 b1 <- ggplot(data=df,
              aes(date, yield/100, colour=country, linetype=country, size=country)) +
@@ -57,3 +60,18 @@ graph <- manipulate (b2(cy), cy = picker(x, label = "Country"))
 #Greece: 20 Oct 2009 - defecit revelation. Dec 2009 ratings agencies downgrade (A1 to A2)
 #9 Feb 2010 first austerity package. 3 March second package. April - more downgrades
 #2 May 2010 bailout. 5 May general strike.
+
+
+b3 <- ggplot(data=subset(df, country %in% c("PT", "IT", "IE", "GR", "ES", "DE")),
+             aes(date, yield/100, colour=country, linetype=country, size=country)) +
+  geom_line() +
+  scale_y_continuous(labels = percent_format()) +
+  scale_size_manual(values=c(rep.int(1, 19))) +
+  scale_linetype_manual(values=c(rep.int(1, 19))) +
+  ylab("European Long Term Bond Yields (ECB)") + 
+  theme_bw()
+
+#Adding Greek bailout date and Euro circulation date
+b3 + 
+  geom_vline(xintercept=as.numeric(as.Date("2009-10-20"))) + 
+  geom_vline(xintercept=as.numeric(as.Date("2002-01-01")))  
