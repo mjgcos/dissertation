@@ -74,6 +74,6 @@ b3 <- ggplot(data=subset(df, country %in% c("PT", "IT", "IE", "GR", "ES", "DE"))
 #Adding Greek bailout date and Euro circulation date
 b4 <- b3 + 
   geom_vline(xintercept=as.numeric(as.Date("2009-10-20"))) + 
-  geom_vline(xintercept=as.numeric(as.Date("2002-01-01")))  
+  geom_vline(xintercept=as.numeric(as.Date("1999-01-01")))  
 
 ggsave(b4, file="../graphics/lti_gpiigs.pdf")
