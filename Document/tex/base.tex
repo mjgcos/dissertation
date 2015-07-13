@@ -2,13 +2,9 @@
 \usepackage{graphicx}
 \usepackage{base_style}
 %\includeonly{filelist}
-\usepackage{natbib}
 \usepackage{subfiles}
 
-\def\biblio{\bibliographystyle{econ}\bibliography{../dissn_bibliography.bib}}
-
 \begin{document}
-\def\biblio{}
 
 \subfile{./sections/title.tex}
 
@@ -28,6 +24,7 @@
 %Bibliography
 \clearpage
 \addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{econ}
 \bibliography{../dissn_bibliography.bib}
 
 \end{document}
