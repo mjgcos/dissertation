@@ -18,7 +18,7 @@ data$date <- as.Date(data$date, "%b %Y")
 x <- colnames(data)
 
 df <- data %>% 
-  gather(country, yield, Austria..Euro:Slovakia..Euro)
+    gather(country, yield, Austria..Euro:Slovakia..Euro)
 
 levels(df$country) <- c("AT", "BE", "CY", "DE", "ES", "FI", "FR", "UK", "GR", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PT", "SI", "SK")
 df$date <- as.chron(df$date)
@@ -30,12 +30,12 @@ df$date <- as.Date(df$date, format="%m/%d/%y")
 #Graphs
 b1 <- ggplot(data=df,
              aes(date, yield/100, colour=country, linetype=country, size=country)) +
-  geom_line() +
-  scale_y_continuous(labels = percent_format()) +
-  scale_size_manual(values=c(rep.int(1, 19))) +
-  scale_linetype_manual(values=c(rep.int(1, 19))) +
-  ylab("European Long Term Bond Yields (ECB)") + 
-  theme_bw()
+    geom_line() +
+    scale_y_continuous(labels = percent_format()) +
+    scale_size_manual(values=c(rep.int(1, 19))) +
+    scale_linetype_manual(values=c(rep.int(1, 19))) +
+    ylab("European Long Term Bond Yields (ECB)") + 
+    theme_bw()
 
 #NOTES: Great convergence in 1990s, great divergence in 2010s.
 #Find pre-ECB data to see extent of convergence.
@@ -43,15 +43,15 @@ b1 <- ggplot(data=df,
 
 #For greater simplicity of selection, impose filter for countries
 b2 <- function(cy){
-  subdf <- subset(df, country == cy)
-  ggplot(subdf,
-             aes(x=date, y=(yield/100), colour=country, linetype=country, size=country)) +
-  geom_line() +
-  scale_y_continuous(labels = percent_format()) +
-  #scale_size_manual(values=c(rep.int(1, 19))) +
-  #scale_linetype_manual(values=c(rep.int(1, 19))) +
-  ylab("European Long Term Bond Yields (ECB)") + 
-  theme_bw()
+    subdf <- subset(df, country == cy)
+    ggplot(subdf,
+           aes(x=date, y=(yield/100), colour=country, linetype=country, size=country)) +
+        geom_line() +
+        scale_y_continuous(labels = percent_format()) +
+        #scale_size_manual(values=c(rep.int(1, 19))) +
+        #scale_linetype_manual(values=c(rep.int(1, 19))) +
+        ylab("European Long Term Bond Yields (ECB)") + 
+        theme_bw()
 }
 x <- as.list(as.character(unique(df$country)))
 
@@ -64,16 +64,16 @@ graph <- manipulate (b2(cy), cy = picker(x, label = "Country"))
 
 b3 <- ggplot(data=subset(df, country %in% c("PT", "IT", "IE", "GR", "ES", "DE")),
              aes(date, yield/100, colour=country)) +
-  geom_line() +
-  scale_y_continuous(labels = percent_format()) +
-  scale_size_manual(values=c(rep.int(1, 19))) +
-  scale_linetype_manual(values=c(rep.int(1, 19))) +
-  ylab("European Long Term Bond Yields (ECB)") + 
-  theme_bw()
+    geom_line() +
+    scale_y_continuous(labels = percent_format()) +
+    scale_size_manual(values=c(rep.int(1, 19))) +
+    scale_linetype_manual(values=c(rep.int(1, 19))) +
+    ylab("European Long Term Bond Yields (ECB)") + 
+    theme_bw()
 
 #Adding Greek bailout date and Euro circulation date
 b4 <- b3 + 
-  geom_vline(xintercept=as.numeric(as.Date("2009-10-20"))) + 
-  geom_vline(xintercept=as.numeric(as.Date("1999-01-01")))  
+    geom_vline(xintercept=as.numeric(as.Date("2009-10-20"))) + 
+    geom_vline(xintercept=as.numeric(as.Date("1999-01-01")))  
 
 ggsave(b4, file="../graphics/lti_gpiigs.pdf")
