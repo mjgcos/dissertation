@@ -1,0 +1,51 @@
+\documentclass[../base.tex]{subfiles}
+
+\begin{document}
+\section{Estimation Methodology}
+
+Terminology list:
+
+$s_{it}$: bond yield/CDS spread (dependent variable)
+
+$\alpha_j$: Fixed effect coefficient
+
+$\beta$: Contagion coefficient (multiple possible transmission paths)
+
+$\delta$: Common factors coefficients, as in PP
+
+$\gamma$: Idiosyncratic factors coefficients ($\alpha$ in PP)
+
+$D_t$: Crisis dummy (defined in PP model as $D_{it} = I(s_{jt} - c_j\sigma{j, t-1}$)
+
+$X_{it}$: Idiosyncratic variables
+
+$Z_t$: Common factors. 
+
+\subsection{Na\"{i}ve Estimation}
+
+\cite{giordano2013pure} describe two empirical models to provide an initial estimate of contagion coefficients. 
+
+Stationary case:
+
+\begin{align}
+	s_{it} = \alpha_{i0} + \alpha_{1}s_{it-1} +\gamma X_{it} + \delta Z_t + \beta_0D_t + \beta_1D_ts_{it-1} + \beta_2D_tX_{it} + \beta_3D_tZ_t + \varepsilon_{it}
+\end{align}
+
+Non-stationary:
+
+\begin{align}
+	s_{it} = \alpha_{i0} + \gamma X_{it} + \delta Z_t + \beta_0D_t + \beta_2D_tX_{it} + \beta_3D_tZ_t + \varepsilon_{it}
+\end{align}
+
+
+\subsection{Pesaran and Pick Estimation}
+
+\begin{align}
+	s_{it} = \gamma_i X_{it} + \delta Z_t + \beta_0D_t + \beta_2D_tX_{it} + \beta_3D_tZ_t + \varepsilon_{it} \\
+	
+	s_{it} = \alpha_{i0} + \gamma X_{it} + \delta Z_t + \beta_0D_t + \beta_2D_tX_{it} + \beta_3D_tZ_t + \varepsilon_{it} 
+\end{align}
+
+
+
+\end{document}
