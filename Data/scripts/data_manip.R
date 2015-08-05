@@ -1,6 +1,9 @@
 #library(xlsx)
 
-setwd("~/Academic/SGPE/Dissertation/Data/csv")
+#setwd("~/Academic/SGPE/Dissertation/Data/csv")
+setwd("~/dissertation/Data/csv/")
+
+
 dat <- read.csv("datastream_combined.csv", colClasses = "character")
 
 #basic manipulation
