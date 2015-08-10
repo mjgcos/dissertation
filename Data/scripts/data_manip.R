@@ -1,4 +1,6 @@
 #library(xlsx)
+library(dplyr)
+library(tidyr)
 
 setwd("~/Academic/SGPE/Dissertation/Data/csv")
 #setwd("~/dissertation/Data/csv/")
@@ -30,9 +32,9 @@ dat$bsp_sk <- dat[,14] - dat[,2]
 
 
 #Global Indicators
-dat$vol_vix <- dat[,16]
-dat$vol_vstoxx <- dat[,17]
-dat$euribor <- dat[,18]
+dat$vix_all <- dat[,16]
+dat$vstoxx_all <- dat[,17]
+dat$euribor_all <- dat[,18]
 
 #Stock price indices
 dat$stocks_at <- dat[,27]
@@ -64,12 +66,24 @@ dat$cds_sv <- dat[,59] #sweden
 dat$cds_uk <- dat[,60]
 dat$cds_us <- dat[,61]
 
-df <- cbind(dat$date, dat[,66:105])
+df <- cbind(dat[,1], dat[,66:105])
+names(df)[1] <- "date"
 
 #write.csv(df,"cleaned_datastram.csv", row.names = FALSE)
 
 #######################
-#######MELTING#########
+#######Tidying#########
 #######################
 
 #cols: date, country, variable, value. 
+
+#using dplyr and tidyr notation, condense variables into entries by date (NB, NAs removed)
+#%>% is dplyr pipe function
+tidier <- df %>% gather(key, value, -date)
+#Split key column into country and variable:
+tidy <- tidier %>% separate(key, into = c("variable", "country"), sep = "\\_")
+#list variables and countries as factor rather than character vector
+tidy$variable <- as.factor(tidy$variable)
+tidy$country <- as.factor(tidy$country)
+#reorder rows by country then date
+tidy <- tidy %>% arrange(date, country)
