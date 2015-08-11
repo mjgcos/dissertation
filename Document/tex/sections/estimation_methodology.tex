@@ -4,6 +4,62 @@
 \section{Estimation Methodology}
 \label{est}
 
+Outline:
+From masson, two broad categories of transmission mechanism: Interdependencies and contagion (equilibria switching). Most of empirical lit focusses on distinguishing between these two. Combined with idiosyncratic shocks, can model crisis. 
+
+Follow PP outline of theoretical model. Demonstrate that in multi-equation setting, absence of country-specific variables will leave interdependencies unidentified, and thus indistinguishable from contagion. (flaw of Forbes and Rigobon paper?) 
+
+Additionally, model presented in PP allows for multiple equilibria. Contagion associated with moves between equilib. \cite{dungey2015endogenous} (DMTY) model smooth transition function to account for gradual `normal' shifts in transmission mechanism. Generally assumed that sharp deviations from this will be contagion effect. 
+
+
+\subsection{Crisis Dating}
+
+Misspecifying crisis periods will result in inconsistent estimations of contagion effects, as well as of interdependencies if they follow a different regime in crisis periods. This is therefore a matter of significant importance to the econometric analysis of contagion episodes, yet the level of attention paid to it varies substantially. Ad hoc `it is generally accepted that crisis started on x date' method vs systematic identification. Methods chosen can be driven by research question - Brutti and Saure methodical at selecting Greek days so that object of research question easier to estimate (financial linkages). 
+
+From DMTY, three common features of crises used for indicators. Increases in volatility above a threshold, changes in transmission mechanisms, institutional action.
+
+Institutional action such as a devaluation, bailout, policy rate change, QE etc used by several studies (). However, clearly endogenous to underlying crisis variables. Depends on research question but this endogeneity usually a problem as misspecifies crisis periods (starts them too late, depending on whether there is an `off switch' linked to policy then that too will be endogenous and likely be late). 
+
+Transmission mechanisms do not remain stable over time even when no crisis. Innovations or underlying structural changes (e.g. Euro graph using ECB data. Later regime change likely due to contagion but convergence not associated with what we would traditionally define as contagion. Something changed in structural transmission to enable convergence - extreme example of euro build up) However, the fact that contagion is defined as a shift in equilibria hints that, if `natural' changes can be detrended out then sudden shifts could provide information relevant to crisis dating.
+
+Volatility tends to increase sharply in crisis periods, can almost be seen as the definition of crisis. Used by range of papers (lead with ERW) to aid with empirical estimation of crisis periods (let data talk method). Often takes form of an indicator function that takes a value of unity if the performance indicator used rises above a certain multiple of the standard deviation (either a time-invariant or ARCH/GARCH prediction)
+
+DMTY combine smooth transition function framework with the dynamics of a structural GARCH model to exploit the last two factors and endogenously estimate the crisis dates, while also estimating the contagion coefficients using a VAR structure. Many of the modelling techniques used, however, are well beyond the scope of this paper, and are reported as illustration of alternative techniques.
+
+A final notable example of an attempt to solve the identification problem is found in \cite{brutti2012transmission}, where the authors utilise the `narrative approach' of \cite{romer1989does} to select days on which news specifically relating to Greece was broken during 2009-10. By stripping out days on which potentially confounding news about other countries broke, contagion originating solely in Greece can be identified and the effect of financial linkages, the initial research question, can be estimated.  
+%double check what exactly they have identified
+
+In this study, 2 (3) methods will be used for comparison. A blunt dating process, taking all values after 2009 announcement as crisis [alt: announcement - bailout, next ramp up - bailout 2, Syriza election - bailout 3]. Primitive narrative approach. Second, threshold method using 1.5 [2] times (un)conditional standard deviation. 
+
+- thought: GARCH model the bond spreads. When exceed 95\% interval, treat as crisis period? 
+
+
+
+\subsection{Estimation Strategies}
+
+naive
+
+PP with GIVE - What does Metiu use?
+
+ 
+PP with FIML
+\cite{massacci2007identification}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 There is substantial econometric literature on the estimation of linkage models. 
 
 Recap: `monsoonal' effects are underlying variables are correlated, `spillovers' are through trade and financial linkages, 
@@ -18,6 +74,7 @@ If do not have specific variable to identify then must assume that crisis period
 
 PP estimate a bias of ... and propose a framework for 
 
+Two main branches of literature. 
 
 
 See multi-eqn PP section on how crisis indicator works there
@@ -75,6 +132,9 @@ Non-stationary:
 	s_{it} =&~\gamma_i X_{it} + \delta Z_t + \beta_0D_t + \beta_2D_tX_{it} + \beta_3D_tZ_t + \varepsilon_{it} \\
 	s_{it} =&~\alpha_{i0} + \gamma X_{it} + \delta Z_t + \beta_0D_t + \beta_2D_tX_{it} + \beta_3D_tZ_t + \varepsilon_{it} 
 \end{align}
+
+
+
 
 
 
