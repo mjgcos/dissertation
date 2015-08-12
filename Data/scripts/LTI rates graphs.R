@@ -60,20 +60,32 @@ graph <- manipulate (b2(cy), cy = picker(x, label = "Country"))
 #Greece: 20 Oct 2009 - defecit revelation. Dec 2009 ratings agencies downgrade (A1 to A2)
 #9 Feb 2010 first austerity package. 3 March second package. April - more downgrades
 #2 May 2010 bailout. 5 May general strike.
-
-
 b3 <- ggplot(data=subset(df, country %in% c("PT", "IT", "IE", "GR", "ES", "DE")),
              aes(date, yield/100, colour=country)) +
+  geom_line() +
+  scale_y_continuous(labels = percent_format()) +
+  scale_size_manual(values=c(rep.int(1, 19))) +
+  scale_linetype_manual(values=c(rep.int(1, 19))) +
+  ylab("European Long Term Bond Yields (ECB)") + 
+  theme_bw()
+
+
+
+publish_plot <- ggplot(data=subset(df, country %in% c("PT", "IT", "IE", "GR",
+                                                      "ES", "DE")),
+             aes(date, yield/100, colour= country)) +
     geom_line() +
     scale_y_continuous(labels = percent_format()) +
     scale_size_manual(values=c(rep.int(1, 19))) +
     scale_linetype_manual(values=c(rep.int(1, 19))) +
+    scale_colour_manual(values = c("black", "orange","blue","green",
+                                   "darkgreen","purple")) +
     ylab("European Long Term Bond Yields (ECB)") + 
     theme_bw()
 
 #Adding Greek bailout date and Euro circulation date
-b4 <- b3 + 
+pp <- publish_plot + 
     geom_vline(xintercept=as.numeric(as.Date("2009-10-20"))) + 
     geom_vline(xintercept=as.numeric(as.Date("1999-01-01")))  
 
-ggsave(b4, file="../graphics/lti_gpiigs.pdf")
+ggsave(pp, file="../graphics/lti_gpiigs2.pdf")

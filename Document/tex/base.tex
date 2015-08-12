@@ -4,6 +4,7 @@
 \usepackage{natbib}
 %\includeonly{filelist}
 \usepackage{subfiles}
+\usepackage{tablefootnote}
 
 \begin{document}
 
@@ -31,5 +32,8 @@
 \addcontentsline{toc}{section}{Bibliography}
 \bibliographystyle{econ}
 \bibliography{../dissn_bibliography}
+
+\appendix
+\subfile{./sections/crisis_dating.tex}
 
 \end{document}
