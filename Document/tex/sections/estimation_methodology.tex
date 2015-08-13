@@ -56,6 +56,7 @@ The solution derived in the two-country setting is easily applicable to the N-co
 This equation will form the foundations of the analysis. The remainder of this section describes the econometric issues with estimating the contagion coefficients, as well as a summary of the estimation techniques used. 
 
 \subsection{Identification of Contagion Coefficients}
+\label{ident}
 
 Earlier studies of contagion (for instance \cite{eichengreen1996contagious} and \cite{esquivel1998explaining} for panel binary choice models, \cite{forbes2002no} and \cite{corsetti2005some} for correlation coefficient-stability based tests) suffer from significant endogeneity problems. Failure to include market-specific regressors ($\mathbf{x}_{i, t}$) means the model reduces to common factor effects (either observed or as a component of the error term) and contagion. It is not possible to find valid instruments with which to identify the contagion coefficient. 
 
@@ -99,7 +100,9 @@ Finally, volatility tends to increase sharply in crisis periods, and can almost 
 
 DMTY combine smooth transition function framework with the dynamics of a structural GARCH model to exploit the last two factors and endogenously determine the crisis dates. They simultaneously estimate the contagion coefficients using a VAR structure. Many of the modelling techniques used, however, are well beyond the scope of this paper, and are reported as illustration of alternative techniques.
 
-A final notable example of an attempt to solve the identification problem is found in \cite{brutti2012transmission}, where the authors utilise the `narrative approach' of \cite{romer1989does} to select days on which news specifically relating to Greece was broken during 2009-10. By stripping out days on which potentially confounding news about other countries broke, contagion originating solely in Greece can be identified and the effect of financial linkages, the initial research question, can be estimated.  
+A final notable example of an attempt to solve the identification problem is found in \cite{brutti2012transmission}, where the authors utilise the `narrative approach' of \cite{romer1989does} to select days on which news specifically relating to Greece was broken during 2009-10. By stripping out days on which potentially confounding news about other countries broke, contagion originating solely in Greece can be identified and the effect of financial linkages, the initial research question, can be estimated. \cite{arezki2011sovereign} apply a similar approach, using sovereign credit rating news as the narrative indicator. 
+
+
 %double check what exactly they have identified
 % Use of reports from newspapers may be flawed: tend to focus on institutional action, subject to issues above.
 

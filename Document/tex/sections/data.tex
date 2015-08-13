@@ -4,14 +4,27 @@
 \section{Data}
 \label{data}
 
-Many recent analyses of market reactions to sovereign default risk have used credit default swap (CDS) spreads to proxy for market expectations. It is important to note that, while ostensibly determined by a similar underlying process, the evolution of CDS premia and bond yields is not identical. As outlined in  (\cite{fontana2010analysis}), the former measure suffers from several complications relating to investor risk-appetite and market liquidity that make it less suitable for drawing policy related conclusions.
+Data were collected from Datastream on July 2nd 2015. As well as the daily observations of zero-coupon 10 year bond spreads against Germany, Euro denominated daily returns on a domestic S\&P stock index is included for each country.
+
+The countries under consideration, France, Germany, Greece, Ireland, Italy, Portugal, Spain, and the Netherlands, comprise three `core' and five `periphery' Eurozone states. This allows comparative analysis between the regions. Though the exclusion of smaller Euro-area countries such as Slovakia or Finland may induce sample selection bias, the eight nations listed above were the only single currency members for whom daily Datastream data was available over the entire sample period and for all variables. 
+
+Many recent analyses of market reactions to sovereign default risk have used credit default swap (CDS) spreads to proxy for market expectations. It is important to note that, while ostensibly determined by a similar underlying process, the evolution of CDS premia and bond yields is not identical. As outlined in  \cite{fontana2010analysis} and \cite{beirne2013pricing}, the former measure suffers from several complications relating to investor risk-appetite and market liquidity that make it less suitable for drawing policy related conclusions.
+
+In addition to the country specific variables, common factors are considered. Following \cite{metiu2012sovereign}, the lagged spread between the Euro Interbank Offered Rate (Euribor) and German Treasury bills is used as a general European risk premium, and the log-differenced VSTOXX index is interpreted as the change in market-expected volatility. \cite{giordano2013pure} use the VIX index as an alternative to the latter, though this is based on U.S. stock volatility and so is better seen as a measure of global risk conditions. 
+
+Summary statistics 
+
+Plots of interest.
+
+An intransigent issue in estimating macroeconomic linkage models is the low-frequency of macro data. Daily observations of the dependent variable are required to evade the endogeneity problems discussed in Section \ref{dating_methodology}. Even weekly or monthly observations are almost certainly too slow to capture the true response to a shock. With variables such as output and employment available only in monthly or quarterly varieties, it is hard to justify their use.
+% Interpolation techniques introduce another potential source of bias. Ask Justus?
+
+Excluding these indicators, however, may introduce new problems. It may be the case that the country-specific variables available at a daily frequency are insufficient to identify the contagion coefficient, as discussed in Section \ref{ident}. In this case, again following \cite{metiu2012sovereign}, daily returns on local stock markets are used. There are obvious endogeneity concerns, as it is highly likely that returns are determined at least partially by the common factors, a European risk premium and expected volatility. However, likely due to lack of available alternatives, stock returns have become a standard tool in the literature.
+
 
 \cite{kaminsky2003unholy} elements (large capital inflows, unanticipated, leveraged common creditor) apply to Greece? Intuitively yes!
 
 
-Sources, datastream etc
 
-
-descriptive stats plus initial plots of interest.
 
 \end{document}
