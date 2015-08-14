@@ -1,7 +1,6 @@
 library(dplyr)
 library(tidyr)
-library(rugarch)
-
+#library(data.table)
 setwd("~/Academic/SGPE/Dissertation/Data/csv")
 
 data <- read.csv("dated.csv")
@@ -13,6 +12,26 @@ data$date <- as.Date(data$date)
 
 common <- filter(data, country == "all")
 common <- select(common, c(date, euribor, vix, vstoxx))
+#Log difference VSTOXX and VIX
+common <- mutate(common, vix = log(vix))
+common <- mutate(common, vstoxx = log(vstoxx))
+
+common$dvix <- c(NA, diff(common$vix, differences = 1))
+common$dvstoxx <- c(NA, diff(common$vstoxx, differences = 1))
+
+common <- common[,c(1,2,5,6)]
+
+#Lagged spread between Euribor and german t bills
+dat <- read.csv("datastream_combined.csv", colClasses = "character")
+dat <- dat[,c(1,2)]
+dat[,1] <- as.Date(dat[,1], format="%d/%m/%Y")
+dat <- subset(dat, dat$date > as.Date("2007-01-01"))
+common <- merge(common, dat, by = "date")
+names(common)[5] <- "de"
+common[,5] <- as.numeric(common[,5])
+common <- mutate(common, euribor = euribor - de)
+common <- mutate(common, euribor = lag(euribor))
+common <- common[,1:4]
 
 #Individual Country
 # As each country equation is estimated individually, can separate once
