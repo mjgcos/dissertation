@@ -5,7 +5,7 @@ setwd("~/Academic/SGPE/Dissertation/Data/csv")
 data <- read.csv("final.csv")
 data$date <- as.Date(data$date)
 
-cy = "ie"
+cy = "it"
 
 ## Perform analysis for one country, get result formatting down then loop over cy.
 
