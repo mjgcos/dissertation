@@ -4,7 +4,7 @@
 \section{Estimation Methodology}
 \label{est}
 
-\cite{pesaran2007econometric} (henceforth PP) consider a two country framework to capture the insights of \cite{masson1999contagion}. The model can be represented by the relations:
+\cite{pesaran2007econometric} (PP) consider a two country framework to capture the insights of \cite{masson1999contagion}. The model can be represented by the relations:
 
 \begin{align} 
 	s_{1,t} =&~\mathbf{\delta}_1^{\prime} \mathbf{x}_{1,t} + \mathbf{\phi}_1^{\prime} \mathbf{F}_t + \beta_1 D_{2,t} + u_{1,t} \label{eqn:system}\\
@@ -55,76 +55,15 @@ The solution derived in the two-country setting is easily applicable to the N-co
 
 This equation will form the foundations of the analysis. The remainder of this section describes the econometric issues with estimating the contagion coefficients, as well as a summary of the estimation techniques used. 
 
-\subsection{Identification of Contagion Coefficients}
-\label{ident}
-
-Earlier studies of contagion (for instance \cite{eichengreen1996contagious} and \cite{esquivel1998explaining} for panel binary choice models, \cite{forbes2002no} and \cite{corsetti2005some} for correlation coefficient-stability based tests) suffer from significant endogeneity problems. Failure to include market-specific regressors ($\mathbf{x}_{i, t}$) means the model reduces to common factor effects (either observed or as a component of the error term) and contagion. It is not possible to find valid instruments with which to identify the contagion coefficient. 
-
-To resolve this, researchers resort to ex post determination of $\mathbf{D}_{i,t}$. 
-
-
-
-
-
-
-
-Finally, while not a concern of this paper, it is worth noting that the panel structure of the dataset has implications for identification. In the case of a sufficiently large number of countries, i.e. $N \rightarrow \infty$, the country-specific contagion coefficients cannot be identified, but for fixed $N$, $T \rightarrow \infty$, the multi-country model converges to the solution of the two-country system. As the analysis is limited to the Eurozone over several years of daily observations, it is reasonable to assume the latter setting applies. The formal result, derived in section 4 of \cite{pesaran2007econometric}, is therefore not reproduced.
-
-
-
-
-Additionally, model presented in PP allows for multiple equilibria. Contagion associated with moves between equilib. \cite{dungey2015endogenous} (DMTY) model smooth transition function to account for gradual `normal' shifts in transmission mechanism. Generally assumed that sharp deviations from this will be contagion effect. 
-
-Unit roots/cointegrations?
-
-
-\subsection{Crisis Dating}
-\label{dating_methodology}
-
-\cite{fry2011actually} survey the literature on five crises since the mid-1990s and find over seventy papers which only rarely agree on precise dating of trigger events. Figure 1 in  \cite{dungey2015endogenous} (DMTY) vividly illustrates the lack of consensus on dating the U.S. financial crisis. Clearly, this is an area for future research to clarify.
-
-Though small disagreements in the dating methodology may not seem a major concern, misspecification of crisis periods will almost certainly lead to inconsistent estimation of the contagion coefficient. If the mistakes are systematic, for example thanks to sample selection bias, then this can have profound effects for the inference 
-
-These problems are compounded by the fact that crisis periods are generally a small fraction of the time period studied. (own dataset, using A: 904/2217 dates in crisis, bad example!)
-
-The level of attention paid to this issue varies substantially in the literature. DMTY identify three  features commonly used by scholars to date crises: increases in volatility above a threshold; changes in transmission mechanisms between countries; and institutional action.
-
-Institutional action, such as a devaluation, bailout, policy rate change, is the most common approach in early studies. As is it most closely linked to the popular understanding of crises\footnote{For instance, discussing the Asian financial crisis, a contemporary BBC article states ``It was the devaluation of the Thai baht in July that began a chain of currency devaluations across the region." This is representative of the mainstream popular view.
-\textit{Source:} \texttt{http://news.bbc.co.uk/1/hi/special\_report/1997/asian\_economic\_woes/34487.stm}}. However, policy action is clearly endogenous to underlying crisis variables. While such a methodology may be justified by the research question under investigation, such a strategy will likely misspecify crises in underlying variables, which policy will respond to with a lag. This is true both of the start and end of crisis episodes. 
-
-Inter-country transmission mechanisms do not remain stable over time even when there is no crisis. Innovations or underlying structural changes to cross-border relationships can confound attempts to use the stability of these linkages as an indicator of contagion. Over longer periods of time, this requires special attention and modelling. However, sudden shifts in the mechanisms, such as those we may observe over short time-spans, hint at a move between equilibria rather than long term trends. This can be used to help with crisis dating.
-
-Finally, volatility tends to increase sharply in crisis periods, and can almost be seen as the definition of crisis. A range of papers (notably with \cite{eichengreen1996contagious}, [others?]) seeking to avoid the sample-selection bias inherent in more subjective approaches, use an indicator function that triggers when the performance indicator - for this study, bond spreads - 
-
- to aid with empirical estimation of crisis periods (let data talk method). Often takes form of an indicator function that takes a value of unity if the performance indicator used rises above a certain multiple of the standard deviation (either a time-invariant or ARCH/GARCH prediction)
-
-DMTY combine smooth transition function framework with the dynamics of a structural GARCH model to exploit the last two factors and endogenously determine the crisis dates. They simultaneously estimate the contagion coefficients using a VAR structure. Many of the modelling techniques used, however, are well beyond the scope of this paper, and are reported as illustration of alternative techniques.
-
-A final notable example of an attempt to solve the identification problem is found in \cite{brutti2012transmission}, where the authors utilise the `narrative approach' of \cite{romer1989does} to select days on which news specifically relating to Greece was broken during 2009-10. By stripping out days on which potentially confounding news about other countries broke, contagion originating solely in Greece can be identified and the effect of financial linkages, the initial research question, can be estimated. \cite{arezki2011sovereign} apply a similar approach, using sovereign credit rating news as the narrative indicator. 
-
-
-%double check what exactly they have identified
-% Use of reports from newspapers may be flawed: tend to focus on institutional action, subject to issues above.
-
-In this study, 2 methods are used. A blunt dating process, using a rudimentary narrative approach, will be used for comparison. Four Eurozone countries, Greece, Ireland, Spain, and Portugal, have received official bailouts since 2009. Table \ref{tab:bailout_dates} outlines the dates chosen as the start and end dates of each of the associated crises, along with sources and notes on selection. These notes further emphasise the arbitrary nature of subjectively selecting crisis dates after the fact. For instance, should a bailout crisis be declared over at the reaching of an agreement with international creditors, or after that agreement passes the national parliament? While elements of this issue could be resolved with a more systematic narrative approach, the subjective compilation of timelines - usually by newspapers - required for such an exercise still introduces selection bias. 
-
-The second method, using the indicator function as given in \cite{pesaran2007econometric}, 
-
- Second, threshold method using 1.5 [2] times (un)conditional standard deviation. 
-
-
-\cite{metiu2012sovereign} VaR
-
-
-%Misspecifying crisis periods will result in inconsistent estimations of contagion effects, as well as of interdependencies if they follow a different regime in crisis periods. This is therefore a matter of significant importance to the econometric analysis of contagion episodes, yet the level of attention paid to it varies substantially. Ad hoc `it is generally accepted that crisis started on x date' method vs systematic identification. Methods chosen can be driven by research question - \cite{brutti2012transmission} methodical at selecting Greek days so that object of research question easier to estimate (financial linkages). 
 
 \subsection{Estimation Strategies}
+\label{est_strat}
 
 In this study, three estimators will be used and the results compared. 
 
 \subsubsection{OLS and GIVE}
 
-Using the standard expositions in 
+Using the standard expositions in Hayashi
 
 If we take the assumptions of dating scheme A to be plausible, the crisis dummies are exogenous and accurately capture the two regimes. OLS provides an unbiased and consistent estimator in this setting. However, as discussed above, these assumptions are unlikely to hold, and $\mathbf{D_{j,t}}$ will be endogenously determined. 
 
@@ -167,34 +106,99 @@ If the parameter values $c_1, c_2$ are given, then the system is linear in param
 
 Neither of these choices of instrument is ideal. The optimal choice of $w_{i,t}$ would be the conditional probability of a crisis occurring at time $t$, given the information set $\Omega_t$. As this is a function of unknown parameters $\gamma_i$, it is infeasible. The instruments chosen are likely to suffer from a weak instrument problem, in which case the distribution of the GIVE estimator will not be asymptotically normal, meaning standard statistical inference may be misleading. A \cite{cragg1993testing} statistic is reported to indicate whether this problem is severe. 
 
+\subsubsection{Full Information Maximum Likelihood}
+
+Dummy variable treated as `Missing at Random' (MAR) (?) i.e. we do not have measurements of the actual data but it relates to some of the variables in the dataset (this may have meant that the missingness of an observation is related to the dependent variables?). If the data are not missing at random (NMAR) then the missing data are `nonignorable'.
+
+It is obviously not really possible to know if the data are MAR or not, as we do not know what the missing values are! 
+
+FIML is shown to produce unbiased parameter estimates and standard errors when data are MAR or MCAR. It operates by estimating a likelihood function for each `individual' based on variables that are present, so all the available data are used. 
+
+As in massacci, compare pairs of countries. System wide estimation of ML is beyond scope etc etc
+
+\cite{massacci2007identification}. Joint pdf of $(y_{1,t}, y_{2,t})^{\prime}$ is piecewise, due to the presence of multiple equilibria.
+%piecewise: function made up of subfunctions. So the total function here is made up of multiple subfunctions, one for wach reigime. 
+
+Show that total probability sums to 1 + Pr(E) = p, where p is normalisation factor. 
+
+$\mathbf{\theta}_k$ denotes vector of slope coefficients in regime $k = 1, 2, 3, 4$ (i.e. whether $\beta_1$, $\beta_2$, or both are included in $\theta$)
 
 
-\subsection{The rest}
+\subsection{Crisis Dating}
+\label{dating_methodology}
+
+\cite{fry2011actually} survey the literature on five crises since the mid-1990s and find over seventy papers which only rarely agree on precise dating of trigger events. Figure 1 in  \cite{dungey2015endogenous} (DMTY) vividly illustrates the lack of consensus on dating the U.S. financial crisis. Clearly, this is an area for future research to clarify.
+
+Though small disagreements in the dating methodology may not seem a major concern, misspecification of crisis periods will almost certainly lead to inconsistent estimation of the contagion coefficient. If the mistakes are systematic, for example thanks to sample selection bias, then this can have profound effects for the inference 
+
+These problems are compounded by the fact that crisis periods are generally a small fraction of the time period studied. (own dataset, using A: 904/2217 dates in crisis, bad example!)
+
+The level of attention paid to this issue varies substantially in the literature. DMTY identify three  features commonly used by scholars to date crises: increases in volatility above a threshold; changes in transmission mechanisms between countries; and institutional action.
+
+Institutional action, such as a devaluation, bailout, policy rate change, is the most common approach in early studies. As is it most closely linked to the popular understanding of crises\footnote{For instance, discussing the Asian financial crisis, a contemporary BBC article states ``It was the devaluation of the Thai baht in July that began a chain of currency devaluations across the region." This is representative of the mainstream popular view.
+	\textit{Source:} \texttt{http://news.bbc.co.uk/1/hi/special\_report/1997/asian\_economic\_woes/34487.stm}}. However, policy action is clearly endogenous to underlying crisis variables. While such a methodology may be justified by the research question under investigation, such a strategy will likely misspecify crises in underlying variables, which policy will respond to with a lag. This is true both of the start and end of crisis episodes. 
+
+Inter-country transmission mechanisms do not remain stable over time even when there is no crisis. Innovations or underlying structural changes to cross-border relationships can confound attempts to use the stability of these linkages as an indicator of contagion. Over longer periods of time, this requires special attention and modelling. However, sudden shifts in the mechanisms, such as those we may observe over short time-spans, hint at a move between equilibria rather than long term trends. This can be used to help with crisis dating.
+
+Finally, volatility tends to increase sharply in crisis periods, and can almost be seen as the definition of crisis. A range of papers (notably with \cite{eichengreen1996contagious}, [others?]) seeking to avoid the sample-selection bias inherent in more subjective approaches, use an indicator function that triggers when the performance indicator - for this study, bond spreads - 
+
+to aid with empirical estimation of crisis periods (let data talk method). Often takes form of an indicator function that takes a value of unity if the performance indicator used rises above a certain multiple of the standard deviation (either a time-invariant or ARCH/GARCH prediction)
+
+DMTY combine smooth transition function framework with the dynamics of a structural GARCH model to exploit the last two factors and endogenously determine the crisis dates. They simultaneously estimate the contagion coefficients using a VAR structure. Many of the modelling techniques used, however, are well beyond the scope of this paper, and are reported as illustration of alternative techniques.
+
+A final notable example of an attempt to solve the identification problem is found in \cite{brutti2012transmission}, where the authors utilise the `narrative approach' of \cite{romer1989does} to select days on which news specifically relating to Greece was broken during 2009-10. By stripping out days on which potentially confounding news about other countries broke, contagion originating solely in Greece can be identified and the effect of financial linkages, the initial research question, can be estimated. \cite{arezki2011sovereign} apply a similar approach, using sovereign credit rating news as the narrative indicator. 
+
+
+%double check what exactly they have identified
+% Use of reports from newspapers may be flawed: tend to focus on institutional action, subject to issues above.
+
+
+\cite{metiu2012sovereign} VaR
+
+In this study, 3 methods are used. 
+
+\underline{Date Scheme A}
+
+A blunt dating process, using a rudimentary narrative approach, will be used for comparison. Four Eurozone countries, Greece, Ireland, Spain, and Portugal, have received official bailouts since 2009. Table \ref{tab:bailout_dates} outlines the dates chosen as the start and end dates of each of the associated crises, along with sources and notes on selection. These notes further emphasise the arbitrary nature of subjectively selecting crisis dates after the fact. For instance, should a bailout crisis be declared over at the reaching of an agreement with international creditors, or after that agreement passes the national parliament? While elements of this issue could be resolved with a more systematic narrative approach, the subjective compilation of timelines - usually by newspapers - required for such an exercise still introduces selection bias. 
+
+\underline{Date Scheme B}
+
+The second method uses the indicator function as given in \cite{pesaran2007econometric}.
+
+\begin{align}
+	D_{j, t} \equiv \mathbf{I}(y_{j,t} - \kappa_j \sigma^2_{j})
+\end{align}
+
+In Section 6, PP estimate the \cite{eichengreen1996contagious} dataset using $\kappa_j = 2$. It is worth noting that the use of the unconditional standard deviation can reintroduce sample selection bias to the procedure. For instance, failure to include previous crises in the sample period will lower the estimated unconditional standard deviation and thus increase the frequency of $D_{j,t} = 1$ in future crises. Conversely, inclusion of much older crisis data may generate $D_{j,t} = 0$ observations even when the realisations of $y_{j,t}$ are abnormally high when considering only the contemporary period. 
+
+This is clearly a matter of preference for the researcher, in terms of how sensitive they require the model to be. More formal attempts to standardise this practise can be found in [Garch modeling?]. 
+
+In this paper, the PP value of $\kappa_j = 2$ is retained, with the unconditional standard deviation calculated over the whole sample period.
+
+\underline{Date Scheme C}
+
+Grid search
+
+Redefining the included instrument vector developed in Section \ref{est_strat}, define $\mathbf{h}_{i,t}(c_j)$ and the matrix $\mathbf{H}_{i}(c_j)$ as
+
+\begin{align}
+	\mathbf{h}_{i,t}(c_j) \equiv [\mathbf{z}_{t}^{\prime}, \mathbf{x}_{i,t}^{\prime}, \mathbf{I}(y_{j,t} - c_j)]^\prime \\
+	\mathbf{H}_i(c_j) \equiv [\mathbf{h}_{i,1}^{\prime}(c_j), ... , \mathbf{h}_{i,T}^{\prime}(c_j)]^{\prime}
+\end{align}
 
 
 
 
+%Misspecifying crisis periods will result in inconsistent estimations of contagion effects, as well as of interdependencies if they follow a different regime in crisis periods. This is therefore a matter of significant importance to the econometric analysis of contagion episodes, yet the level of attention paid to it varies substantially. Ad hoc `it is generally accepted that crisis started on x date' method vs systematic identification. Methods chosen can be driven by research question - \cite{brutti2012transmission} methodical at selecting Greek days so that object of research question easier to estimate (financial linkages). 
 
+\subsection{Identification of Contagion Coefficients}
+\label{ident}
 
-There is substantial econometric literature on the estimation of linkage models. 
+Finally, while not a concern of this paper, it is worth noting that the panel structure of the dataset has implications for identification. In the case of a sufficiently large number of countries, i.e. $N \rightarrow \infty$, the country-specific contagion coefficients cannot be identified, but for fixed $N$, $T \rightarrow \infty$, the multi-country model converges to the solution of the two-country system. As the analysis is limited to the Eurozone over several years of daily observations, it is reasonable to assume the latter setting applies. The formal result, derived in section 4 of \cite{pesaran2007econometric}, is therefore not reproduced.
 
-Recap: `monsoonal' effects are underlying variables are correlated, `spillovers' are through trade and financial linkages, 
+Additionally, model presented in PP allows for multiple equilibria. Contagion associated with moves between equilib. \cite{dungey2015endogenous} (DMTY) model smooth transition function to account for gradual `normal' shifts in transmission mechanism. Generally assumed that sharp deviations from this will be contagion effect. 
 
-Pure correlation tests are not valid in presence of interdependencies. See Pesaran and Pick for monte carlo evidence for bias in presence. 
+Unit roots/cointegrations?
 
-General problem of inference in non-linear simultaneous equation models. 
-
-To identify contagion coefficient, need to have market specific variables included in model OR assume no interdependencies.
-
-If do not have specific variable to identify then must assume that crisis periods can be identified a-priori, and that there are sufficient crisis periods for consistent estimation of the correlation coefficients under both regimes. Parameter stability tests can then be applied. 
-
-PP estimate a bias of ... and propose a framework for 
-
-Two main branches of literature. 
-
-
-See multi-eqn PP section on how crisis indicator works there
-
-In this study, three methods of crisis period delimitation are used. First, in the most simple specification, all periods following the Greek debt announcement are determined as an a-priori specification of crisis. I.e. $D_{i,t} = 1$ for $t > 2009-10-20$, and zero otherwise. Second, following (), a stress period period is defined as bond spread exceeding a threshold of one and a half standard deviations. Formally: $D_{i,t} = I(1.5\sigma_{j,t}), \forall i, j \in \{1, N\}$. Finally, as in \cite{metiu2012sovereign}, a Value at Risk (VaR) model is used. 
 
 \end{document}
