@@ -15,7 +15,7 @@ where $s_{i,t}$ is the spread of country $i$ bonds over German Bunds, $\mathbf{x
 
 The external crisis variable $D_{j, t}$ takes a value of either zero or unity, and the formulation of this variable is discussed in detail in Section \ref{dating_methodology}. For now, it is sufficient to assume an indicator function is triggered if country $j$ sees spreads rise above a certain multiple of its standard deviation. Essentially, $D_{j,t}$ is an endogenous variable of the form $D_{j, t} = I(s_{j, t} - c_j)$ where, for some threshold $c_j$, $I(A) = 1$ if $A >0$ and zero otherwise.
 
-After some simplifications, PP demonstrate that the analytical solution of the model depends crucially upon the strength of fundamentals - defined as $m_{i,t} = \mathbf{\delta}_i^{\prime} \mathbf{x}_{i,t} + \mathbf{\phi}_i^{\prime} \mathbf{F}_t + u_{i,t}$ - an the characteristics of the contagion coefficients. 
+After some simplifications, PP demonstrate that the analytical solution of the model depends crucially upon the strength of fundamentals - defined as $m_{i,t} = \mathbf{\delta}_i^{\prime} \mathbf{x}_{i,t} + \mathbf{\phi}_i^{\prime} \mathbf{F}_t + u_{i,t}$ - and the characteristics of the contagion coefficients. 
 
 If one of $\beta_1$ or $\beta_2$ is zero, then the model possesses a simple solution. Abstracting from the possibility of time-varying thresholds, the system becomes
 
@@ -24,7 +24,14 @@ If one of $\beta_1$ or $\beta_2$ is zero, then the model possesses a simple solu
 	s_{2,t} =&~ m_{2,t}
 \end{align*}
 
-when $\beta_2 = 0$. 
+when $\beta_2 = 0$. $s_{2,t}$ is determined solely by its own fundamentals, while $s_{1,t}$ is a piecewise function of the realised $s_{2,t}$:
+\[
+s_{1,t} = 
+\begin{cases} 
+m_{1,t} + \beta_1  & \text{if } s_{2,t} > 0 \\
+m_{1,t}		       & \text{if } s_{2,t} \leq 0
+\end{cases}
+\]
 
 With two positive contagion coefficients, the solution is not unique for certain values of the fundamental variables. Normalising by the threshold and contagion coefficients, such that $A_{i,t} =~\frac{a_{i,t} - c_i}{\beta_i}$:
 
@@ -42,7 +49,7 @@ which gives a reduced formulation for country 1:
 
 Given the dichotomous nature of the nested indicator function, there are five possible outcomes for equation \ref{eqn:model_soln}, depending on the realisations of the fundamentals. 
 
-Unique solutions exist for all cases in which fundamentals in at least one country are strong or very weak. In the case where both countries have weak, but favourable fundamentals, there exists no unique solution. In the normalised example above, this occurs when $-1 < M_{i,t} \leq 0~\forall~i \in \{1,2\}$. PP provide the example of $\mathbf{M}_t = (-\frac{1}{2}, -\frac{1}{3})^\prime$, for which the solutions $\mathbf{S}_t^a = (-\frac{1}{2}, -\frac{1}{3})^\prime$ and $\mathbf{S}_t^b = (\frac{1}{2}, \frac{2}{3})^\prime$ can both hold.
+Unique solutions exist for all cases in which fundamentals in at least one country are strong or very weak. In the case where both countries have weak, but favourable fundamentals, there exists no unique solution. In the normalised example above, this occurs when $-1 < M_{i,t} \leq 0~~i = 1,2$. PP provide the example of $\mathbf{M}_t = (-\frac{1}{2}, -\frac{1}{3})^\prime$, for which the solutions $\mathbf{S}_t^a = (-\frac{1}{2}, -\frac{1}{3})^\prime$ and $\mathbf{S}_t^b = (\frac{1}{2}, \frac{2}{3})^\prime$ can both hold.
 
 Designating the equilibrium choice by $d_t \sim$ Bernoulli($\pi$), where $\pi$ is the probability of the `bad' outcome of higher spreads, the solution in this region is characterised as $S_{i,t}^*(d_t) =~d_tM_{i,t} + (1 - d_t)(1 + M_{i,t})$. This generates a bimodal distribution of $s_{i,t}^*$ that becomes more pronounced with larger contagion coefficients. Another feature of the model made clear by the above solution is that the dependent variables will be correlated across countries even when fundamentals are uncorrelated, provided $\beta_i \geq 0, \beta_{j \neq i} > 0; i,j \in \{1, 2\}$. 
 
@@ -86,8 +93,8 @@ Defining $\mathbf{w}_{i,t}$ as the vector of instruments, $\mathbf{W}_i \equiv (
 The OLS and GIVE estimators in this setup are:
 
 \begin{align}
-	\hat{\mathbf{\gamma}}_{i, OLS} &= (\mathbf{H}_i^{\prime} \mathbf{H}_i)^{\prime} \mathbf{H}_i^{\prime} \mathbf{y}_i	\label{eqn:ols}\\	
-	\hat{\mathbf{\gamma}}_{i, GIVE} &= (\mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{H}_i)^{\prime} \mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{y}_i \label{eqn:give}	
+	\hat{\mathbf{\gamma}}_{i, OLS} &= (\mathbf{H}_i^{\prime} \mathbf{H}_i)^{-1} \mathbf{H}_i^{\prime} \mathbf{y}_i	\label{eqn:ols}\\	
+	\hat{\mathbf{\gamma}}_{i, GIVE} &= (\mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{H}_i)^{-1} \mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{y}_i \label{eqn:give}	
 \end{align}
 
 and the estimated covariance matrices
@@ -100,15 +107,23 @@ and the estimated covariance matrices
 
 where $\hat{\mathbf{u}}_i = \mathbf{y}_i - \mathbf{H}_i \hat{\gamma}_i$ and $\hat{\sigma}^2_i = \frac{1}{T} (\hat{\mathbf{u}}_i^{\prime} \hat{\mathbf{u}}_i)$. 
 
-If the parameter values $c_1, c_2$ are given, then the system is linear in parameters even though 
+If the parameter values $c_1, c_2$ are given, then the system is linear in parameters even though one of the regressors is a nonlinear function of the endogenous variables from other equations. \cite{pesaran2007econometrics} and \cite{massacci2007identification} use the country-specific exogenous variables ($\mathbf{x}_{i,t}$) as instrument vector $\mathbf{w}_{i,t}$. \cite{metiu2012sovereign}, using an alternative identification strategy, uses lagged terms of the dependent variables for the other countries in the system. All three papers follow \cite{kelejian1971two} and use a polynomial of order $m$ of instrumental variable, as this provides a better approximation of a nonlinear function such as $\mathbf{I}(A)$.
 
-\cite{pesaran2007econometrics} and \cite{massacci2007identification} use the country-specific exogenous variables ($\mathbf{x}_{i,t}$) as instrument vector $\mathbf{w}_{i,t}$. \cite{metiu2012sovereign}, using an alternative identification strategy, uses lagged terms of the dependent variables for the other countries in the system. All three papers follow \cite{kelejian1971two} and use a polynomial of order $m$ of instrumental variable, as this provides a better approximation of a nonlinear function such as $\mathbf{I}(A)$.
-
-Neither of these choices of instrument is ideal. The optimal choice of $w_{i,t}$ would be the conditional probability of a crisis occurring at time $t$, given the information set $\Omega_t$. As this is a function of unknown parameters $\gamma_i$, it is infeasible. The instruments chosen are likely to suffer from a weak instrument problem, in which case the distribution of the GIVE estimator will not be asymptotically normal, meaning standard statistical inference may be misleading. A \cite{cragg1993testing} statistic is reported to indicate whether this problem is severe. 
+Neither of these choices of instrument is ideal. The optimal choice of $w_{i,t}$ would be the conditional probability of a crisis occurring at time $t$, given the information set $\Omega_t = (\mathbf{F}_t^\prime), \mathbf{x}_{i,t}^{\prime}, \mathbf{x}_{j_t}^{\prime}$. As this is a function of unknown parameters $\gamma_i$, it is infeasible. The instruments chosen are likely to suffer from a weak instrument problem, in which case the distribution of the GIVE estimator will not be asymptotically normal, meaning standard statistical inference may be misleading. A \cite{cragg1993testing} statistic is reported to indicate whether this problem is severe. 
 
 \subsubsection{Full Information Maximum Likelihood}
 
-Dummy variable treated as `Missing at Random' (MAR) (?) i.e. we do not have measurements of the actual data but it relates to some of the variables in the dataset (this may have meant that the missingness of an observation is related to the dependent variables?). If the data are not missing at random (NMAR) then the missing data are `nonignorable'.
+\cite{massacci2007identification} takes the model in PP, and derives a Full Information Maximum Likelihood (FIML) estimator, treating the crisis dummies as missing data that are related to variables in the dataset. Using Monte Carlo simulations, Massaccci finds that FIML performs better than GIVE, while not circumventing the weak instruments problem by not requiring equation specific dummies to identify the contagion coefficients. Instead, identification is achieved by exploiting the dichotomous outcomes of the indicator function. 
+
+This means that the identification condition is that at least one observation of $s_{i,t}$ falls either side of the threshold variable $c_i$. Under the assumptions that the elements of $\Omega_t$ are ergodic stationary variables, and that the errors $\mathbf{u}_t~\sim~IID(\mathbf{0}, \mathbf{\Sigma_u})$, then Massacci shows the proportion of observations above the threshold converges almost surely to the population probability of exceeding it, $\pi_i (c_i) \equiv \mathit{E}[\mathbf{I}(y_{i,t} -c_i)]$.
+
+The model is incoherent. Due to multiple equilibria outcome in the positive but weak fundamental zone, the probabilities of individual outcomes sum to more than unity. A normalisation factor $p_t$ is employed, such that the cumulative density function does not exceed one. 
+
+ 
+
+Dummy variable treated as `Missing at Random' (MAR) (?) i.e. we do not have measurements of the actual data but it relates to some of the variables in the dataset (this may have meant that the missingness of an observation is related to the dependent variables?). If the data are not missing at random (NMAR) then the missing data are `nonignorable'. 
+
+Latent variable is observable, distribution considered MVN? D is Bernoulli?
 
 It is obviously not really possible to know if the data are MAR or not, as we do not know what the missing values are! 
 
@@ -116,12 +131,12 @@ FIML is shown to produce unbiased parameter estimates and standard errors when d
 
 As in massacci, compare pairs of countries. System wide estimation of ML is beyond scope etc etc
 
-\cite{massacci2007identification}. Joint pdf of $(y_{1,t}, y_{2,t})^{\prime}$ is piecewise, due to the presence of multiple equilibria.
+ Joint pdf of $(y_{1,t}, y_{2,t})^{\prime}$ is piecewise, due to the presence of multiple equilibria.
 %piecewise: function made up of subfunctions. So the total function here is made up of multiple subfunctions, one for wach reigime. 
 
-Show that total probability sums to 1 + Pr(E) = p, where p is normalisation factor. 
+%Show that total probability sums to 1 + Pr(E) = p, where p is normalisation factor. 
 
-$\mathbf{\theta}_k$ denotes vector of slope coefficients in regime $k = 1, 2, 3, 4$ (i.e. whether $\beta_1$, $\beta_2$, or both are included in $\theta$)
+Given that $s_{i,t}$ can, at any time, be in one of two states ($s_{i,t} > c_i or s_{i,t} \leq c_i$), then for the two country case, four possible regimes exist. $\mathbf{\theta}_k$ denotes vector of slope coefficients in regime $k = 1, 2, 3, 4$ (i.e. whether $\beta_1$, $\beta_2$, or both are included in $\theta$)
 
 
 \subsection{Crisis Dating}
