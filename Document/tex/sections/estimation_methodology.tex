@@ -13,7 +13,7 @@
 
 where $s_{i,t}$ is the spread of country $i$ bonds over German Bunds, $\mathbf{x}_{i,t}$ is a vector of country-specific regressors (including any lags of the dependent variable), $\mathbf{F}_t$ is a vector of factors common to all countries, and $D_{j, t}$ is a dummy variable indicating a crisis in country $j \neq i$ at time $t$. $u_{i, t}$ is a serially uncorrelated error term with idiosyncratic conditional variances $\sigma^2_{ui, t-1}, i \in \{1, 2\}$ and a non-zero correlation coefficient $\rho$ that is assumed to be time invariant for ease of exposition. 
 
-The external crisis variable $D_{j, t}$ takes a value of either zero or unity, and the formulation of this variable is discussed in detail in Section \ref{dating_methodology}. For now, it is sufficient to assume an indicator function is triggered if country $j$ sees spreads rise above a certain multiple of its standard deviation. Essentially, $D_{j, t} = I(s_{j, t} - c_j \sigma_{j, t-1})$ where $I(A) = 1$ if $A >0$ and zero otherwise.
+The external crisis variable $D_{j, t}$ takes a value of either zero or unity, and the formulation of this variable is discussed in detail in Section \ref{dating_methodology}. For now, it is sufficient to assume an indicator function is triggered if country $j$ sees spreads rise above a certain multiple of its standard deviation. Essentially, $D_{j,t}$ is an endogenous variable of the form $D_{j, t} = I(s_{j, t} - c_j \sigma_{j, t-1})$ where $I(A) = 1$ if $A >0$ and zero otherwise.
 
 After some simplifications, PP demonstrate that the analytical solution of the model depends crucially upon the strength of fundamentals - defined as $m_{i,t} = \mathbf{\delta}_i^{\prime} \mathbf{x}_{i,t} + \mathbf{\phi}_i^{\prime} \mathbf{F}_t + u_{i,t}$ - an the characteristics of the contagion coefficients. 
 
@@ -120,13 +120,15 @@ The second method, using the indicator function as given in \cite{pesaran2007eco
 
 \subsection{Estimation Strategies}
 
-naive
+If we take the assumptions of dating scheme A to be plausible, the crisis dummies are exogenous and accurately capture the two regimes. OLS provides an unbiased and consistent estimator in this setting. 
 
 PP with GIVE - PP and Metiu.
 
  
 PP with FIML
 \cite{massacci2007identification}
+
+
 
 
 
