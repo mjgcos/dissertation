@@ -6,14 +6,14 @@
 
 \cite{pesaran2007econometric} (henceforth PP) consider a two country framework to capture the insights of \cite{masson1999contagion}. The model can be represented by the relations:
 
-\begin{align}
-	s_{1,t} =&~\mathbf{\delta}_1^{\prime} \mathbf{x}_{1,t} + \mathbf{\phi}_1^{\prime} \mathbf{F}_t + \beta_1 D_{2,t} + u_{1,t} \\
-	s_{2,t} =&~\boldmath{\delta}_2^{\prime} \mathbf{x}_{2,t} + \mathbf{\phi}_2^{\prime} \mathbf{F_t} + \beta_2 D_{1,t} + u_{2,t}
+\begin{align} 
+	s_{1,t} =&~\mathbf{\delta}_1^{\prime} \mathbf{x}_{1,t} + \mathbf{\phi}_1^{\prime} \mathbf{F}_t + \beta_1 D_{2,t} + u_{1,t} \label{eqn:system}\\
+	s_{2,t} =&~\boldmath{\delta}_2^{\prime} \mathbf{x}_{2,t} + \mathbf{\phi}_2^{\prime} \mathbf{F_t} + \beta_2 D_{1,t} + u_{2,t} \label{eqn:system2}
 \end{align}
 
 where $s_{i,t}$ is the spread of country $i$ bonds over German Bunds, $\mathbf{x}_{i,t}$ is a vector of country-specific regressors (including any lags of the dependent variable), $\mathbf{F}_t$ is a vector of factors common to all countries, and $D_{j, t}$ is a dummy variable indicating a crisis in country $j \neq i$ at time $t$. $u_{i, t}$ is a serially uncorrelated error term with idiosyncratic conditional variances $\sigma^2_{ui, t-1}, i \in \{1, 2\}$ and a non-zero correlation coefficient $\rho$ that is assumed to be time invariant for ease of exposition. 
 
-The external crisis variable $D_{j, t}$ takes a value of either zero or unity, and the formulation of this variable is discussed in detail in Section \ref{dating_methodology}. For now, it is sufficient to assume an indicator function is triggered if country $j$ sees spreads rise above a certain multiple of its standard deviation. Essentially, $D_{j,t}$ is an endogenous variable of the form $D_{j, t} = I(s_{j, t} - c_j \sigma_{j, t-1})$ where $I(A) = 1$ if $A >0$ and zero otherwise.
+The external crisis variable $D_{j, t}$ takes a value of either zero or unity, and the formulation of this variable is discussed in detail in Section \ref{dating_methodology}. For now, it is sufficient to assume an indicator function is triggered if country $j$ sees spreads rise above a certain multiple of its standard deviation. Essentially, $D_{j,t}$ is an endogenous variable of the form $D_{j, t} = I(s_{j, t} - c_j)$ where, for some threshold $c_j$, $I(A) = 1$ if $A >0$ and zero otherwise.
 
 After some simplifications, PP demonstrate that the analytical solution of the model depends crucially upon the strength of fundamentals - defined as $m_{i,t} = \mathbf{\delta}_i^{\prime} \mathbf{x}_{i,t} + \mathbf{\phi}_i^{\prime} \mathbf{F}_t + u_{i,t}$ - an the characteristics of the contagion coefficients. 
 
@@ -120,21 +120,52 @@ The second method, using the indicator function as given in \cite{pesaran2007eco
 
 \subsection{Estimation Strategies}
 
-If we take the assumptions of dating scheme A to be plausible, the crisis dummies are exogenous and accurately capture the two regimes. OLS provides an unbiased and consistent estimator in this setting. 
+In this study, three estimators will be used and the results compared. 
 
-PP with GIVE - PP and Metiu.
+\subsubsection{OLS and GIVE}
 
- 
-PP with FIML
-\cite{massacci2007identification}
+Using the standard expositions in 
+
+If we take the assumptions of dating scheme A to be plausible, the crisis dummies are exogenous and accurately capture the two regimes. OLS provides an unbiased and consistent estimator in this setting. However, as discussed above, these assumptions are unlikely to hold, and $\mathbf{D_{j,t}}$ will be endogenously determined. 
+
+\cite{pesaran2007econometric} and \cite{metiu2012sovereign} use Generalised Instrumental Variable Estimation (GIVE) to consistently estimate the contagion coefficient. It is assumed that $\mathbf{D_{j,t}},~ j = 1, 2$ is endogenous, while all other variables are predetermined. It is also assumed that the threshold parameters $c_1$ and $c_2$ are known. Following the exposition in \cite{massacci2007identification}, vectors $\mathbf{\gamma_i}$, $\mathbf{y}_i$, and $\mathbf{h_{i,t}}$, for $i,j = 1,2 ~~ i \neq j$ are defined as 
+
+\begin{align*}
+ \mathbf{\gamma}_i \equiv& (\mathbf{\phi}_i^{\prime}, \mathbf{\delta}_{i}^{\prime}, \beta_i)^{\prime} \\
+ \mathbf{y}_i \equiv& (y_{i,1},...,y_{i,T})^{\prime}\\
+ \mathbf{h}_{i,t} \equiv& [\mathbf{F}_t^{\prime}, \mathbf{x}_{i,t}^{\prime}, \mathbf{I}(y_{j,t} - c_j)]^{\prime}
+\end{align*}
+
+with the matrix $\mathbf{H}_i \equiv (\mathbf{h}_{i,1}^{\prime},..., \mathbf{h}_{i,T}^{\prime})^{\prime}$ representing the included instruments for country $i$ across the sample period. 
+
+Defining $\mathbf{w}_{i,t}$ as the vector of instruments, $\mathbf{W}_i \equiv (\mathbf{w}_{i,1}^{\prime},..., \mathbf{w}_{i,T}^{\prime})^{\prime}$ is the matrix of excluded instruments that can be used to construct the projection matrix for the 2SLS regressions: $\mathbf{P}_{\mathbf{W}_i} \equiv \mathbf{W}_i (\mathbf{W}_i^{\prime} \mathbf{W}_i)^{-1} \mathbf{W}_i^{\prime}$. The system in equations (\ref{eqn:system}) and (\ref{eqn:system2}) are expressed as
+
+\begin{align}
+	\mathbf{y}_i = \mathbf{H}_i \mathbf{\gamma}_i + \mathbf{u}_i \label{eqn:matrix_system}
+\end{align}
+
+The OLS and GIVE estimators in this setup are:
+
+\begin{align}
+	\hat{\mathbf{\gamma}}_{i, OLS} &= (\mathbf{H}_i^{\prime} \mathbf{H}_i)^{\prime} \mathbf{H}_i^{\prime} \mathbf{y}_i	\label{eqn:ols}\\	
+	\hat{\mathbf{\gamma}}_{i, GIVE} &= (\mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{H}_i)^{\prime} \mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{y}_i \label{eqn:give}	
+\end{align}
+
+and the estimated covariance matrices
+
+\begin{align*}
+	\hat{\mathbf{V}}_{i, OLS} &= \hat{\sigma}^2_i (\mathbf{H}_i^{\prime} \mathbf{H}_i)^{-1} \\
+	\hat{\mathbf{V}}_{i, GIVE} &= \hat{\sigma}^2_i (\mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{H}_i)^{-1}
+\end{align*}
 
 
+where $\hat{\mathbf{u}}_i = \mathbf{y}_i - \mathbf{H}_i \hat{\gamma}_i$ and $\hat{\sigma}^2_i = \frac{1}{T} (\hat{\mathbf{u}}_i^{\prime} \hat{\mathbf{u}}_i)$. 
 
+If the parameter values $c_1, c_2$ are given, then the system is linear in parameters even though 
 
+\cite{pesaran2007econometrics} and \cite{massacci2007identification} use the country-specific exogenous variables ($\mathbf{x}_{i,t}$) as instrument vector $\mathbf{w}_{i,t}$. \cite{metiu2012sovereign}, using an alternative identification strategy, uses lagged terms of the dependent variables for the other countries in the system. All three papers follow \cite{kelejian1971two} and use a polynomial of order $m$ of instrumental variable, as this provides a better approximation of a nonlinear function such as $\mathbf{I}(A)$.
 
-
-
-
+Neither of these choices of instrument is ideal. The optimal choice of $w_{i,t}$ would be the conditional probability of a crisis occurring at time $t$, given the information set $\Omega_t$. As this is a function of unknown parameters $\gamma_i$, it is infeasible. The instruments chosen are likely to suffer from a weak instrument problem, in which case the distribution of the GIVE estimator will not be asymptotically normal, meaning standard statistical inference may be misleading. A \cite{cragg1993testing} statistic is reported to indicate whether this problem is severe. 
 
 
 
@@ -165,29 +196,5 @@ Two main branches of literature.
 See multi-eqn PP section on how crisis indicator works there
 
 In this study, three methods of crisis period delimitation are used. First, in the most simple specification, all periods following the Greek debt announcement are determined as an a-priori specification of crisis. I.e. $D_{i,t} = 1$ for $t > 2009-10-20$, and zero otherwise. Second, following (), a stress period period is defined as bond spread exceeding a threshold of one and a half standard deviations. Formally: $D_{i,t} = I(1.5\sigma_{j,t}), \forall i, j \in \{1, N\}$. Finally, as in \cite{metiu2012sovereign}, a Value at Risk (VaR) model is used. 
-
-
-\subsection{Na\"{i}ve Estimation}
-
-\cite{giordano2013pure} describe two empirical models to provide an initial estimate of contagion coefficients. 
-
-Stationary case:
-
-\begin{align}
-	s_{it} = \alpha_{i0} + \alpha_{1}s_{it-1} +\gamma X_{it} + \delta Z_t + \beta_0D_t + \beta_1D_ts_{it-1} + \beta_2D_tX_{it} + \beta_3D_tZ_t + \varepsilon_{it}
-\end{align}
-
-Non-stationary:
-
-\begin{align}
-	s_{it} = \alpha_{i0} + \gamma X_{it} + \delta Z_t + \beta_0D_t + \beta_2D_tX_{it} + \beta_3D_tZ_t + \varepsilon_{it}
-\end{align}
-
-
-
-
-
-
-
 
 \end{document}
