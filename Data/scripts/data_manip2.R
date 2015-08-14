@@ -67,4 +67,4 @@ ind2 <-  merge(ind2, crisis, by = "date")
 final <- merge(ind2, common, by="date")
 final <- arrange(final, country, date)
 
-#write.csv(final, "final.csv")
+#write.csv(final, "final.csv", row.names = FALSE)
