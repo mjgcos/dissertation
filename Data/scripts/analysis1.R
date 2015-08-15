@@ -25,7 +25,7 @@ data <- merge(data, insts, by="date")
 ###### OLS & GIVE ########
 ##########################
 m = 6
-#i = 5
+i = 3
 
 countries <- as.character(levels(country))
 
@@ -119,4 +119,13 @@ for(i in 1:7){
 
 }
 
+##### Results so much less significant in both cases using differenced data.
+## Lag operators generated, not included in model yet.
+
+##Plot of differenced bond spreads shows how volatility increased substantially
+## in 2011-12 for Italy.
+
+## NEED TO GO BACK AND REESTIMATE CRISIS DATES
+
+## Also need to do polynomial. 
 
