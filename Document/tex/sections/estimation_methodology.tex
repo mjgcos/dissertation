@@ -7,15 +7,15 @@
 \cite{pesaran2007econometric} (PP) consider a two country framework to capture the insights of \cite{masson1999contagion}. The model can be represented by the relations:
 
 \begin{align} 
-	s_{1,t} =&~\mathbf{\delta}_1^{\prime} \mathbf{x}_{1,t} + \mathbf{\phi}_1^{\prime} \mathbf{F}_t + \beta_1 D_{2,t} + u_{1,t} \label{eqn:system}\\
-	s_{2,t} =&~\boldmath{\delta}_2^{\prime} \mathbf{x}_{2,t} + \mathbf{\phi}_2^{\prime} \mathbf{F_t} + \beta_2 D_{1,t} + u_{2,t} \label{eqn:system2}
+	s_{1,t} =&~\boldsymbol{\delta}_1^{\prime} \mathbf{x}_{1,t} + \boldsymbol{\phi}_1^{\prime} \mathbf{F}_t + \beta_1 D_{2,t} + u_{1,t} \label{eqn:system}\\
+	s_{2,t} =&~\boldsymbol{\delta}_2^{\prime} \mathbf{x}_{2,t} + \boldsymbol{\phi}_2^{\prime} \mathbf{F_t} + \beta_2 D_{1,t} + u_{2,t} \label{eqn:system2}
 \end{align}
 
-where $s_{i,t}$ is the spread of country $i$ bonds over German Bunds, $\mathbf{x}_{i,t}$ is a vector of country-specific regressors (including any lags of the dependent variable), $\mathbf{F}_t$ is a vector of factors common to all countries, and $D_{j, t}$ is a dummy variable indicating a crisis in country $j \neq i$ at time $t$. $u_{i, t}$ is a serially uncorrelated error term with idiosyncratic conditional variances $\sigma^2_{ui, t-1}, i \in \{1, 2\}$ and a non-zero correlation coefficient $\rho$ that is assumed to be time invariant for ease of exposition. 
+where $s_{i,t}$ is the spread of country $i$ bond yields over the German equivalent, $\mathbf{x}_{i,t}$ is a vector of country-specific regressors (including any lags of the dependent variable), $\mathbf{F}_t$ is a vector of factors common to all countries, and $D_{j, t}$ is a dummy variable indicating a crisis in country $j \neq i$ at time $t$. $u_{i, t}$ is a serially uncorrelated error term with idiosyncratic conditional variances $\sigma^2_{ui, t-1}, i = 1, 2$ and a non-zero correlation coefficient $\rho$ that is assumed to be time invariant for ease of exposition. 
 
-The external crisis variable $D_{j, t}$ takes a value of either zero or unity, and the formulation of this variable is discussed in detail in Section \ref{dating_methodology}. For now, it is sufficient to assume an indicator function is triggered if country $j$ sees spreads rise above a certain multiple of its standard deviation. Essentially, $D_{j,t}$ is an endogenous variable of the form $D_{j, t} = I(s_{j, t} - c_j)$ where, for some threshold $c_j$, $I(A) = 1$ if $A >0$ and zero otherwise.
+The external crisis variable $D_{j, t}$ takes a value of either zero or unity, and the formulation of this variable is discussed in detail in Section \ref{dating_methodology}. For now, it is sufficient to assume an indicator function is triggered if country $j$ sees spreads rise above a certain threshold $c_j$. Essentially, $D_{j,t}$ is an endogenous variable of the form $D_{j, t} = I(s_{j, t} - c_j)$ where $I(A) = 1$ if $A >0$ and zero otherwise.
 
-After some simplifications, PP demonstrate that the analytical solution of the model depends crucially upon the strength of fundamentals - defined as $m_{i,t} = \mathbf{\delta}_i^{\prime} \mathbf{x}_{i,t} + \mathbf{\phi}_i^{\prime} \mathbf{F}_t + u_{i,t}$ - and the characteristics of the contagion coefficients. 
+After some simplifications, PP demonstrate that the analytical solution of the model depends crucially upon the strength of fundamentals - defined as $m_{i,t} = \boldsymbol{\delta}_i^{\prime} \mathbf{x}_{i,t} + \boldsymbol{\phi}_i^{\prime} \mathbf{F}_t + u_{i,t}$ - and the characteristics of the contagion coefficients. 
 
 If one of $\beta_1$ or $\beta_2$ is zero, then the model possesses a simple solution. Abstracting from the possibility of time-varying thresholds, the system becomes
 
@@ -49,14 +49,18 @@ which gives a reduced formulation for country 1:
 
 Given the dichotomous nature of the nested indicator function, there are five possible outcomes for equation \ref{eqn:model_soln}, depending on the realisations of the fundamentals. 
 
+Cases go here.
+
 Unique solutions exist for all cases in which fundamentals in at least one country are strong or very weak. In the case where both countries have weak, but favourable fundamentals, there exists no unique solution. In the normalised example above, this occurs when $-1 < M_{i,t} \leq 0~~i = 1,2$. PP provide the example of $\mathbf{M}_t = (-\frac{1}{2}, -\frac{1}{3})^\prime$, for which the solutions $\mathbf{S}_t^a = (-\frac{1}{2}, -\frac{1}{3})^\prime$ and $\mathbf{S}_t^b = (\frac{1}{2}, \frac{2}{3})^\prime$ can both hold.
 
-Designating the equilibrium choice by $d_t \sim$ Bernoulli($\pi$), where $\pi$ is the probability of the `bad' outcome of higher spreads, the solution in this region is characterised as $S_{i,t}^*(d_t) =~d_tM_{i,t} + (1 - d_t)(1 + M_{i,t})$. This generates a bimodal distribution of $s_{i,t}^*$ that becomes more pronounced with larger contagion coefficients. Another feature of the model made clear by the above solution is that the dependent variables will be correlated across countries even when fundamentals are uncorrelated, provided $\beta_i \geq 0, \beta_{j \neq i} > 0; i,j \in \{1, 2\}$. 
 
-The solution derived in the two-country setting is easily applicable to the N-country formulation. 
+% This bit is weak, needs reworking
+Designating the equilibrium choice by $d_t \sim$ Bernoulli($\pi^E$), where $\pi^E$ is the probability of the `bad' outcome of higher spreads, the solution in this region is characterised as $S_{i,t}^*(d_t) =~d_tM_{i,t} + (1 - d_t)(1 + M_{i,t})$. This generates a bimodal distribution of $s_{i,t}^*$ that becomes more pronounced with larger contagion coefficients. Another feature of the model made clear by the above solution is that the dependent variables will be correlated across countries through the crisis dummy even when fundamentals are uncorrelated, provided $\beta_i \geq 0, \beta_{j \neq i} > 0;~~ i,j = 1, 2$. 
+
+The solution derived in the two-country setting is extended to the N-country formulation:
 
 \begin{align}
-	s_{i,t} =&~\mathbf{\delta}_1^{\prime} \mathbf{x}_{i,t} + \mathbf{\phi}_i^{\prime} \mathbf{F}_t + \sum_{j=1}^{N}\beta_j D_{j,t} + u_{i,t}, ~~~ i = 1,2,...,N ; j \neq i
+	s_{i,t} =&~\boldsymbol{\delta}_1^{\prime} \mathbf{x}_{i,t} + \boldsymbol{\phi}_i^{\prime} \mathbf{F}_t + \sum_{j=1}^{N}\beta_j D_{j,t} + u_{i,t}, ~~~ i = 1,2,...,N ; j \neq i
 	\label{eqn:pp_multi}	
 \end{align}
 
@@ -66,38 +70,38 @@ This equation will form the foundations of the analysis. The remainder of this s
 \subsection{Estimation Strategies}
 \label{est_strat}
 
-In this study, three estimators will be used and the results compared. 
+In this study, three estimators will be used and the results compared. Again, for ease of notation, the two-country model will be considered. For the first two methods, extension to the N country case using equation (\ref{eqn:pp_multi}) is simple. The complexities in doing so for the final estimator mean that this study will estimate the model for country pairs and leave the derivation of a full system estimator for future work. 
 
 \subsubsection{OLS and GIVE}
 
-Using the standard expositions in Hayashi
+Using the standard formulations in \cite{hayashi2000econometrics} as a foundation, and the expositions found in \cite{pesaran2007econometric} and \cite{massacci2007identification}, the OLS and Generalised Instrumental Variables (GIVE) estimator are derived below.
 
-If we take the assumptions of dating scheme A to be plausible, the crisis dummies are exogenous and accurately capture the two regimes. OLS provides an unbiased and consistent estimator in this setting. However, as discussed above, these assumptions are unlikely to hold, and $\mathbf{D_{j,t}}$ will be endogenously determined. 
+If we treat the dates of the crisis as predetermined, the dummy variables $D_{j,t}, ~ j = 1, 2$ are exogenous and accurately capture the two regimes. OLS provides an unbiased and consistent estimator in this setting. However, as discussed above, these assumptions are unlikely to hold, and $D_{j,t}$ will be endogenously determined. 
 
-\cite{pesaran2007econometric} and \cite{metiu2012sovereign} use Generalised Instrumental Variable Estimation (GIVE) to consistently estimate the contagion coefficient. It is assumed that $\mathbf{D_{j,t}},~ j = 1, 2$ is endogenous, while all other variables are predetermined. It is also assumed that the threshold parameters $c_1$ and $c_2$ are known. Following the exposition in \cite{massacci2007identification}, vectors $\mathbf{\gamma_i}$, $\mathbf{y}_i$, and $\mathbf{h_{i,t}}$, for $i,j = 1,2 ~~ i \neq j$ are defined as 
+\cite{pesaran2007econometric} and \cite{metiu2012sovereign} use Generalised Instrumental Variable Estimation (GIVE) to consistently estimate the contagion coefficient. It is assumed that $D_{j,t},~ j = 1, 2$ is endogenous, while all other variables are predetermined. It is also assumed that the threshold parameters $c_1$ and $c_2$ are known. Vectors $\boldsymbol{\gamma}_i$, $\mathbf{y}_i$, and $\mathbf{h}_{i,t}$, for $i,j = 1,2 ~~ i \neq j$ are defined as 
 
 \begin{align*}
- \mathbf{\gamma}_i \equiv& (\mathbf{\phi}_i^{\prime}, \mathbf{\delta}_{i}^{\prime}, \beta_i)^{\prime} \\
- \mathbf{y}_i \equiv& (y_{i,1},...,y_{i,T})^{\prime}\\
- \mathbf{h}_{i,t} \equiv& [\mathbf{F}_t^{\prime}, \mathbf{x}_{i,t}^{\prime}, \mathbf{I}(y_{j,t} - c_j)]^{\prime}
+ \boldsymbol{\gamma}_i \equiv&~ (\boldsymbol{\phi}_i^{\prime}, \boldsymbol{\delta}_{i}^{\prime}, \beta_i)^{\prime} \\
+ \mathbf{y}_i \equiv&~ (y_{i,1},...,y_{i,T})^{\prime}\\
+ \mathbf{h}_{i,t} \equiv&~ [\mathbf{F}_t^{\prime}, \mathbf{x}_{i,t}^{\prime}, \mathbf{I}(y_{j,t} - c_j)]^{\prime}
 \end{align*}
 
-with the matrix $\mathbf{H}_i \equiv (\mathbf{h}_{i,1}^{\prime},..., \mathbf{h}_{i,T}^{\prime})^{\prime}$ representing the included instruments for country $i$ across the sample period. 
+with the matrix $\mathbf{H}_i \equiv (\mathbf{h}_{i,1}^{\prime},..., \mathbf{h}_{i,T}^{\prime})^{\prime}$ representing the included instruments for country $i$ across the whole sample period $T$. 
 
-Defining $\mathbf{w}_{i,t}$ as the vector of instruments, $\mathbf{W}_i \equiv (\mathbf{w}_{i,1}^{\prime},..., \mathbf{w}_{i,T}^{\prime})^{\prime}$ is the matrix of excluded instruments that can be used to construct the projection matrix for the 2SLS regressions: $\mathbf{P}_{\mathbf{W}_i} \equiv \mathbf{W}_i (\mathbf{W}_i^{\prime} \mathbf{W}_i)^{-1} \mathbf{W}_i^{\prime}$. The system in equations (\ref{eqn:system}) and (\ref{eqn:system2}) are expressed as
+Defining $\mathbf{w}_{i,t}$ as the vector of instruments, $\mathbf{W}_i \equiv (\mathbf{w}_{i,1}^{\prime},..., \mathbf{w}_{i,T}^{\prime})^{\prime}$ is the matrix of excluded instruments, and the projection matrix is: $\mathbf{P}_{\mathbf{W}_i} \equiv \mathbf{W}_i (\mathbf{W}_i^{\prime} \mathbf{W}_i)^{-1} \mathbf{W}_i^{\prime}$. The system in equations (\ref{eqn:system}) and (\ref{eqn:system2}) is expressed as
 
 \begin{align}
-	\mathbf{y}_i = \mathbf{H}_i \mathbf{\gamma}_i + \mathbf{u}_i \label{eqn:matrix_system}
+	\mathbf{y}_i = \mathbf{H}_i \boldsymbol{\gamma}_i + \mathbf{u}_i \label{eqn:matrix_system}
 \end{align}
 
 The OLS and GIVE estimators in this setup are:
 
 \begin{align}
-	\hat{\mathbf{\gamma}}_{i, OLS} &= (\mathbf{H}_i^{\prime} \mathbf{H}_i)^{-1} \mathbf{H}_i^{\prime} \mathbf{y}_i	\label{eqn:ols}\\	
-	\hat{\mathbf{\gamma}}_{i, GIVE} &= (\mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{H}_i)^{-1} \mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{y}_i \label{eqn:give}	
+	\hat{\boldsymbol{\gamma}}_{i, OLS} &= (\mathbf{H}_i^{\prime} \mathbf{H}_i)^{-1} \mathbf{H}_i^{\prime} \mathbf{y}_i	\label{eqn:ols}\\	
+	\hat{\boldsymbol{\gamma}}_{i, GIVE} &= (\mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{H}_i)^{-1} \mathbf{H}_i^{\prime} \mathbf{P}_{\mathbf{W}_i} \mathbf{y}_i \label{eqn:give}	
 \end{align}
 
-and the estimated covariance matrices
+and the theoretical estimated covariance matrices
 
 \begin{align*}
 	\hat{\mathbf{V}}_{i, OLS} &= \hat{\sigma}^2_i (\mathbf{H}_i^{\prime} \mathbf{H}_i)^{-1} \\
@@ -105,20 +109,24 @@ and the estimated covariance matrices
 \end{align*}
 
 
-where $\hat{\mathbf{u}}_i = \mathbf{y}_i - \mathbf{H}_i \hat{\gamma}_i$ and $\hat{\sigma}^2_i = \frac{1}{T} (\hat{\mathbf{u}}_i^{\prime} \hat{\mathbf{u}}_i)$. 
+where $\hat{\mathbf{u}}_i = \mathbf{y}_i - \mathbf{H}_i \hat{\boldsymbol{\gamma}}_i$ and $\hat{\sigma}^2_i = \frac{1}{T} (\hat{\mathbf{u}}_i^{\prime} \hat{\mathbf{u}}_i)$. 
 
-If the parameter values $c_1, c_2$ are given, then the system is linear in parameters even though one of the regressors is a nonlinear function of the endogenous variables from other equations. \cite{pesaran2007econometrics} and \cite{massacci2007identification} use the country-specific exogenous variables ($\mathbf{x}_{i,t}$) as instrument vector $\mathbf{w}_{i,t}$. \cite{metiu2012sovereign}, using an alternative identification strategy, uses lagged terms of the dependent variables for the other countries in the system. All three papers follow \cite{kelejian1971two} and use a polynomial of order $m$ of instrumental variable, as this provides a better approximation of a nonlinear function such as $\mathbf{I}(A)$.
+%need to be precise here
+If the parameter values $c_1, c_2$ are known, then the system is linear in parameters even though one of the regressors is a nonlinear function of the endogenous variables from other equations. \cite{pesaran2007econometrics} and \cite{massacci2007identification} use the country-specific exogenous variables ($\mathbf{x}_{i,t}$) as instrument vector $\mathbf{w}_{i,t}$. \cite{metiu2012sovereign}, using an alternative identification strategy to the one presented here, uses lagged terms of the dependent variables for the other countries in the system. All three papers follow \cite{kelejian1971two} and use a polynomial of order $m$ of instrumental variable, as this provides a better approximation of a nonlinear function such as $\mathbf{I}(A)$.
 
-Neither of these choices of instrument is ideal. The optimal choice of $w_{i,t}$ would be the conditional probability of a crisis occurring at time $t$, given the information set $\Omega_t = (\mathbf{F}_t^\prime), \mathbf{x}_{i,t}^{\prime}, \mathbf{x}_{j_t}^{\prime}$. As this is a function of unknown parameters $\gamma_i$, it is infeasible. The instruments chosen are likely to suffer from a weak instrument problem, in which case the distribution of the GIVE estimator will not be asymptotically normal, meaning standard statistical inference may be misleading. A \cite{cragg1993testing} statistic is reported to indicate whether this problem is severe. 
+Neither of these choices of instrument is ideal. The optimal choice of $w_{i,t}$ would be the conditional probability of a crisis occurring at time $t$, given the information set $\Omega_t = (\mathbf{F}_t^\prime, \mathbf{x}_{i,t}^{\prime}, \mathbf{x}_{j_t}^{\prime})$. As this is a function of unknown parameters $\gamma_i$, it is infeasible. The instruments chosen are likely to suffer from a weak instrument problem, in which case the distribution of the GIVE estimator will not be asymptotically normal, meaning standard statistical inference may be misleading. A \cite{cragg1993testing} statistic is reported to indicate whether this problem is severe, and refer to the critical values given in \cite{stock2005testing}.
 
 \subsubsection{Full Information Maximum Likelihood}
 
-\cite{massacci2007identification} takes the model in PP, and derives a Full Information Maximum Likelihood (FIML) estimator, treating the crisis dummies as missing data that are related to variables in the dataset. Using Monte Carlo simulations, Massaccci finds that FIML performs better than GIVE, while not circumventing the weak instruments problem by not requiring equation specific dummies to identify the contagion coefficients. Instead, identification is achieved by exploiting the dichotomous outcomes of the indicator function. 
+\cite{massacci2007identification} takes the model in PP, and derives a Full Information Maximum Likelihood (FIML) estimator, treating the crisis dummies as missing data that are related to variables in the dataset. Using Monte Carlo simulations, Massaccci finds that FIML performs better than GIVE, while imposing fewer requirements on the data by not requiring equation specific variables to identify the contagion coefficients. Instead, identification is achieved by exploiting the dichotomous outcomes of the indicator function. This means that the identification condition is that at least one observation of $s_{i,t}$ falls either side of the threshold variable $c_i$. 
 
-This means that the identification condition is that at least one observation of $s_{i,t}$ falls either side of the threshold variable $c_i$. Under the assumptions that the elements of $\Omega_t$ are ergodic stationary variables, and that the errors $\mathbf{u}_t~\sim~IID(\mathbf{0}, \mathbf{\Sigma_u})$, then Massacci shows the proportion of observations above the threshold converges almost surely to the population probability of exceeding it, $\pi_i (c_i) \equiv \mathit{E}[\mathbf{I}(y_{i,t} -c_i)]$.
+Under the assumptions that the elements of $\Omega_t$ are ergodic stationary variables, and that the errors $\mathbf{u}_t~\sim~IID(\mathbf{0}, \mathbf{\Sigma_u})$, Massacci shows the proportion of observations above the threshold converges almost surely to the population probability of exceeding it, $\pi_i (c_i) \equiv \mathit{E}[\mathbf{I}(y_{i,t} -c_i)]$.
+
+%Sketch proof here
 
 The model is incoherent. Due to multiple equilibria outcome in the positive but weak fundamental zone, the probabilities of individual outcomes sum to more than unity. A normalisation factor $p_t$ is employed, such that the cumulative density function does not exceed one. 
 
+Link back to previous section where regimes will be listed.
  
 
 Dummy variable treated as `Missing at Random' (MAR) (?) i.e. we do not have measurements of the actual data but it relates to some of the variables in the dataset (this may have meant that the missingness of an observation is related to the dependent variables?). If the data are not missing at random (NMAR) then the missing data are `nonignorable'. 
@@ -136,30 +144,26 @@ As in massacci, compare pairs of countries. System wide estimation of ML is beyo
 
 %Show that total probability sums to 1 + Pr(E) = p, where p is normalisation factor. 
 
-Given that $s_{i,t}$ can, at any time, be in one of two states ($s_{i,t} > c_i or s_{i,t} \leq c_i$), then for the two country case, four possible regimes exist. $\mathbf{\theta}_k$ denotes vector of slope coefficients in regime $k = 1, 2, 3, 4$ (i.e. whether $\beta_1$, $\beta_2$, or both are included in $\theta$)
+Given that $s_{i,t}$ can, at any time, be in one of two states ($s_{i,t} > c_i or s_{i,t} \leq c_i$), then for the two country case, four possible regimes exist. $\boldsymbol{\theta}_k$ denotes vector of slope coefficients in regime $k = 1, 2, 3, 4$ (i.e. whether $\beta_1$, $\beta_2$, or both are included in $\theta$)
 
 
 \subsection{Crisis Dating}
 \label{dating_methodology}
 
-\cite{fry2011actually} survey the literature on five crises since the mid-1990s and find over seventy papers which only rarely agree on precise dating of trigger events. Figure 1 in  \cite{dungey2015endogenous} (DMTY) vividly illustrates the lack of consensus on dating the U.S. financial crisis. Clearly, this is an area for future research to clarify.
+A key concern in all the above methods is the proceedure used to determined $D_{j,t}$. There is little consensus on how to solve this problem in the literature. \cite{fry2011actually} survey the literature on five crises since the mid-1990s and find over seventy papers which only rarely agree on precise dating of trigger events. Figure 1 in  \cite{dungey2015endogenous} (DMTY) vividly illustrates the lack of consensus on dating the U.S. financial crisis. Clearly, this is an area for future research to clarify.
 
 Though small disagreements in the dating methodology may not seem a major concern, misspecification of crisis periods will almost certainly lead to inconsistent estimation of the contagion coefficient. If the mistakes are systematic, for example thanks to sample selection bias, then this can have profound effects for the inference 
 
-These problems are compounded by the fact that crisis periods are generally a small fraction of the time period studied. (own dataset, using A: 904/2217 dates in crisis, bad example!)
-
 The level of attention paid to this issue varies substantially in the literature. DMTY identify three  features commonly used by scholars to date crises: increases in volatility above a threshold; changes in transmission mechanisms between countries; and institutional action.
 
-Institutional action, such as a devaluation, bailout, policy rate change, is the most common approach in early studies. As is it most closely linked to the popular understanding of crises\footnote{For instance, discussing the Asian financial crisis, a contemporary BBC article states ``It was the devaluation of the Thai baht in July that began a chain of currency devaluations across the region." This is representative of the mainstream popular view.
-	\textit{Source:} \texttt{http://news.bbc.co.uk/1/hi/special\_report/1997/asian\_economic\_woes/34487.stm}}. However, policy action is clearly endogenous to underlying crisis variables. While such a methodology may be justified by the research question under investigation, such a strategy will likely misspecify crises in underlying variables, which policy will respond to with a lag. This is true both of the start and end of crisis episodes. 
+Institutional action, such as a devaluation, bailout, policy rate change, is the most common approach in early studies. This is unsurprising, as is it most closely linked to the popular understanding of crises\footnote{For instance, discussing the Asian financial crisis, a contemporary BBC article states clearly that ``It was the devaluation of the Thai baht in July that began a chain of currency devaluations across the region." This is representative of the mainstream popular view.
+	\textit{Source:} \texttt{http://news.bbc.co.uk/1/hi/special\_report/1997/asian\_economic\_woes/34487.stm}}. However, policy action is almost certainly endogenous to underlying crisis variables, as policy often responds with a lag to developments in the macroeconomy or currency/bond markets rather than causing those developments. As it is the evolution of the underlying variable we are interested in, using such a strategy will likely misspecify crises periods. This is true both of the start and end of episodes. 
 
-Inter-country transmission mechanisms do not remain stable over time even when there is no crisis. Innovations or underlying structural changes to cross-border relationships can confound attempts to use the stability of these linkages as an indicator of contagion. Over longer periods of time, this requires special attention and modelling. However, sudden shifts in the mechanisms, such as those we may observe over short time-spans, hint at a move between equilibria rather than long term trends. This can be used to help with crisis dating.
+Inter-country transmission mechanisms are more valid in terms of econometric theory, but do not remain stable over time even when there is no crisis. Innovations or underlying structural changes to cross-border relationships can confound attempts to use the stability of these linkages as an indicator of contagion. Over longer periods of time, this requires special attention and modelling. However, sudden shifts in the mechanisms, such as those we may observe over short time-spans, hint at a move between equilibria rather than long term trends. This can be used to help with crisis dating.
 
-Finally, volatility tends to increase sharply in crisis periods, and can almost be seen as the definition of crisis. A range of papers (notably with \cite{eichengreen1996contagious}, [others?]) seeking to avoid the sample-selection bias inherent in more subjective approaches, use an indicator function that triggers when the performance indicator - for this study, bond spreads - 
+Finally, volatility tends to increase sharply in crisis periods, and can almost be seen as the definition of crisis. A range of papers (notably \cite{eichengreen1996contagious} and \cite{pesaran2007econometric}) seeking to avoid the sample-selection bias inherent in more subjective approaches, use an indicator function that triggers when the performance measure rises above a certain multiple of its standard deviation. This approach attempts to allow the data to determine crisis periods, and reduce researcher discretion in the selection process.
 
-to aid with empirical estimation of crisis periods (let data talk method). Often takes form of an indicator function that takes a value of unity if the performance indicator used rises above a certain multiple of the standard deviation (either a time-invariant or ARCH/GARCH prediction)
-
-DMTY combine smooth transition function framework with the dynamics of a structural GARCH model to exploit the last two factors and endogenously determine the crisis dates. They simultaneously estimate the contagion coefficients using a VAR structure. Many of the modelling techniques used, however, are well beyond the scope of this paper, and are reported as illustration of alternative techniques.
+DMTY combine smooth transition function framework with a structural GARCH model to exploit the latter two factors and endogenously determine the crisis dates. They simultaneously estimate the contagion coefficients using a VAR structure. \cite{metiu2012sovereign} uses a one-step-ahead Value-at-Risk (VaR) model to denote periods of stress. Many of the modelling techniques used in these two papers, however, are well beyond the scope of this study.
 
 A final notable example of an attempt to solve the identification problem is found in \cite{brutti2012transmission}, where the authors utilise the `narrative approach' of \cite{romer1989does} to select days on which news specifically relating to Greece was broken during 2009-10. By stripping out days on which potentially confounding news about other countries broke, contagion originating solely in Greece can be identified and the effect of financial linkages, the initial research question, can be estimated. \cite{arezki2011sovereign} apply a similar approach, using sovereign credit rating news as the narrative indicator. 
 
@@ -168,27 +172,25 @@ A final notable example of an attempt to solve the identification problem is fou
 % Use of reports from newspapers may be flawed: tend to focus on institutional action, subject to issues above.
 
 
-\cite{metiu2012sovereign} VaR
-
-In this study, 3 methods are used. 
+A description follows of the three dating schemes used in this exercise.
 
 \underline{Date Scheme A}
 
-A blunt dating process, using a rudimentary narrative approach, will be used for comparison. Four Eurozone countries, Greece, Ireland, Spain, and Portugal, have received official bailouts since 2009. Table \ref{tab:bailout_dates} outlines the dates chosen as the start and end dates of each of the associated crises, along with sources and notes on selection. These notes further emphasise the arbitrary nature of subjectively selecting crisis dates after the fact. For instance, should a bailout crisis be declared over at the reaching of an agreement with international creditors, or after that agreement passes the national parliament? While elements of this issue could be resolved with a more systematic narrative approach, the subjective compilation of timelines - usually by newspapers - required for such an exercise still introduces selection bias. 
+As institutional action is such a popular indicator in the literature, a form of narrative dating approach is presented first. Four Eurozone countries, Greece, Ireland, Spain, and Portugal, have received official bailouts since 2009. Table \ref{tab:bailout_dates} outlines the dates chosen as the start and end dates of each of the associated crises, along with sources and notes on selection. These notes further emphasise the arbitrary nature of subjectively selecting crisis dates after the fact. For instance, should a bailout crisis be declared over at the reaching of an agreement with international creditors, or after that agreement passes the national parliament? While elements of this issue could be resolved with a more systematic narrative approach, the subjective compilation of timelines - usually by newspapers - required for such an exercise is likely to still introduce selection bias. 
+
+The a priori specification of the crisis periods means that the dummies can theoretically be treated as predetermined. However, given that narratives about the Eurozone crisis revolve around bond market behaviour, endogeneity is still likely to be a problem - even if the crisis periods are well specified.
 
 \underline{Date Scheme B}
 
-The second method uses the indicator function as given in \cite{pesaran2007econometric}.
+The second method exploits the heightened volatility evident in crisis times, and uses the indicator function given in \cite{pesaran2007econometric}:
 
 \begin{align}
 	D_{j, t} \equiv \mathbf{I}(y_{j,t} - \kappa_j \sigma^2_{j})
 \end{align}
 
-In Section 6, PP estimate the \cite{eichengreen1996contagious} dataset using $\kappa_j = 2$. It is worth noting that the use of the unconditional standard deviation can reintroduce sample selection bias to the procedure. For instance, failure to include previous crises in the sample period will lower the estimated unconditional standard deviation and thus increase the frequency of $D_{j,t} = 1$ in future crises. Conversely, inclusion of much older crisis data may generate $D_{j,t} = 0$ observations even when the realisations of $y_{j,t}$ are abnormally high when considering only the contemporary period. 
+In Section 6, PP estimate the \cite{eichengreen1996contagious} dataset using $\kappa_j = 2$. It is worth noting that the use of the unconditional standard deviation can again reintroduce sample selection bias to the procedure. For instance, failure to include previous crises in the sample period will lower the estimated unconditional standard deviation and thus increase the frequency of $D_{j,t} = 1$ in future crises. Conversely, inclusion of much older crisis data may generate $D_{j,t} = 0$ observations even when the realisations of $y_{j,t}$ are abnormally high when considering only the contemporary period. 
 
-This is clearly a matter of preference for the researcher, in terms of how sensitive they require the model to be. More formal attempts to standardise this practise can be found in [Garch modeling?]. 
-
-In this paper, the PP value of $\kappa_j = 2$ is retained, with the unconditional standard deviation calculated over the whole sample period.
+In this scheme, the PP value of $\kappa_j = 2$ is retained, with the standard deviation calculated over the whole sample period.
 
 \underline{Date Scheme C}
 
@@ -206,12 +208,10 @@ Redefining the included instrument vector developed in Section \ref{est_strat}, 
 
 %Misspecifying crisis periods will result in inconsistent estimations of contagion effects, as well as of interdependencies if they follow a different regime in crisis periods. This is therefore a matter of significant importance to the econometric analysis of contagion episodes, yet the level of attention paid to it varies substantially. Ad hoc `it is generally accepted that crisis started on x date' method vs systematic identification. Methods chosen can be driven by research question - \cite{brutti2012transmission} methodical at selecting Greek days so that object of research question easier to estimate (financial linkages). 
 
-\subsection{Identification of Contagion Coefficients}
-\label{ident}
+\subsection{The Rest}
 
 Finally, while not a concern of this paper, it is worth noting that the panel structure of the dataset has implications for identification. In the case of a sufficiently large number of countries, i.e. $N \rightarrow \infty$, the country-specific contagion coefficients cannot be identified, but for fixed $N$, $T \rightarrow \infty$, the multi-country model converges to the solution of the two-country system. As the analysis is limited to the Eurozone over several years of daily observations, it is reasonable to assume the latter setting applies. The formal result, derived in section 4 of \cite{pesaran2007econometric}, is therefore not reproduced.
 
-Additionally, model presented in PP allows for multiple equilibria. Contagion associated with moves between equilib. \cite{dungey2015endogenous} (DMTY) model smooth transition function to account for gradual `normal' shifts in transmission mechanism. Generally assumed that sharp deviations from this will be contagion effect. 
 
 Unit roots/cointegrations?
 
