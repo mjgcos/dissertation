@@ -1,12 +1,13 @@
 library(dplyr)
 library(tidyr)
+library(urca)
 #library(data.table)
 setwd("~/Academic/SGPE/Dissertation/Data/csv")
 
 data <- read.csv("dated.csv")
 data$date <- as.Date(data$date)
-## Objective is to manipulate dataframe into objects that can be taken as arguments in
-## the GIVE formulation. 
+## Objective is to manipulate dataframe into objects that can be taken 
+##as arguments in the GIVE formulation. 
 
 #Common Factors
 
@@ -40,6 +41,42 @@ include = c("es", "fr", "gr", "ie", "it","pt", "nl")
 ind <- data[, c(1:4, 6, 9:15)]
 ind <- filter(ind, country %in% include )
 
+### Time series modelling of bsp ###
+countries <- as.character(levels(country))
+times <- filter(data, country == "fr")
+acf(times$bsp)
+ur.df(times$bsp)
+qnorm(c(0.01, 0.05, 0.1))
+#although can reject null for NL at 10%, others cannot be rejected
+#conclude that series are not stationary, difference.
+
+tind <- ind[,c(1,2,3)]
+tind <- spread(tind, country,  bsp)
+n <- names(tind)
+
+for(i in 2:8){
+  tind[,i] <- c(NA, diff(tind[,i], differences = 1))
+  }
+tind <- gather(tind,country,bsp, -date)
+
+ind <- ind[,c(-2, -3)]
+ind <- data.frame(tind, ind)
+ind <- ind[,-4]
+####### More TS testing####
+cy = "gr"
+times <- filter(ind, country = cy)
+acf(times$bsp, na.action = na.pass)
+pacf(times$bsp, na.action = na.pass)
+### ACF now well behaved, PACF less so but justification for using a few lags.
+### Can get AIC, Metiu uses 5 lags to account for within-week variation.
+
+ur.df(times[2:nrow(times), "bsp"])
+qnorm(c(0.01, 0.05, 0.1))
+## Now getting huge ADF stats, unit root removed.
+
+
+
+
 crisis_1.5 <- select(ind, c(date, country, crisis_b_1.5))
 crisis_1.5 <- spread(crisis_1.5, country, crisis_b_1.5)
 nms <- names(crisis_1.5)
@@ -67,4 +104,4 @@ ind2 <-  merge(ind2, crisis, by = "date")
 final <- merge(ind2, common, by="date")
 final <- arrange(final, country, date)
 
-#write.csv(final, "final.csv", row.names = FALSE)
+write.csv(final, "final.csv", row.names = FALSE)
