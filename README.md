@@ -13,4 +13,3 @@ Used to store and update my dissertation R and LaTeX files.
 - [x] Literature review
 - [ ] Analysis using OLS, GIVE, FIML
 - [ ] Write up
--
