@@ -62,8 +62,19 @@ for(j in 1:6){
 
 olsreg <- lm(bsp ~ stocks + euribor + vol + 
                d_1 + d_2 + d_3 + d_4 + d_5 + d_6, data = ready)
+# print ols output to text file
+# First, create variables to pass to cat
+fname <- paste("../../Document/out/summary_ols_", cy, ".txt", sep = "")
+out <- capture.output(summary(olsreg))
+header <- paste("OLS Output:", cy)
+# print to text file. append = FALSE means data will be overwritten.
+cat(header, namekey, out, file= fname, 
+    sep="\n", append=FALSE)
 
-ivreg(bsp ~ stocks + euribor + vol + 
-        d_1 + d_2 + d_3 + d_4 + d_5 + d_6 | stocks + euribor + vol +
-        , data = ready)
+#ivreg(bsp ~ stocks + euribor + vol + 
+#        d_1 + d_2 + d_3 + d_4 + d_5 + d_6 | stocks + euribor + vol +
+#        , data = ready)
+
+#print ivreg output to text file
+
 
