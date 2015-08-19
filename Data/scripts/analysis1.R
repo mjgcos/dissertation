@@ -45,7 +45,7 @@ data <- subset(data, date > as.Date("2007-09-01"))
 ###### OLS & GIVE ########
 ##########################
 m = 6
-#i = 5
+i = 3
 
 countries <- as.character(levels(country))
 
@@ -295,16 +295,12 @@ a_coefs_i <- a_coefs_i[,c(-1,-2)]
 a_ses_i <- a_ses_i[,c(-1,-2)]
 
 
+
 write.table(format(a_coefs, digits=2, scientific = F), 
             file = "../../Document/out/tables/cols_b.txt", sep = "&")
 write.table(format(a_ses, digits=2, scientific = F), 
             file = "../../Document/out/tables/sols_b.txt", sep = ")&(")    
 
-write.table(format(a_coefs_i, digits=2, scientific = F), 
-            file = "../../Document/out/tables/civ_b.txt", sep = "&")
-write.table(format(a_ses_i, digits=2, scientific = F), 
-            file = "../../Document/out/tables/siv_b.txt", sep = ")&(")
-################################ AAAAA
 # 
 # for(i in 1:7){
 #   #filter by country i
