@@ -38,44 +38,47 @@ common <- common[,1:4]
 # As each country equation is estimated individually, can separate once
 # crisis dummies etc in correct framework.
 include = c("es", "fr", "gr", "ie", "it","pt", "nl")
-ind <- data[, c(1:4, 6, 9:15)]
+ind <- data[, c(1:4, 6, 9:16)]
 ind <- filter(ind, country %in% include )
 
-### Time series modelling of bsp ###
-countries <- as.character(levels(country))
-times <- filter(data, country == "fr")
-acf(times$bsp)
-ur.df(times$bsp)
-qnorm(c(0.01, 0.05, 0.1))
-#although can reject null for NL at 10%, others cannot be rejected
-#conclude that series are not stationary, difference.
+###### This section has been moved to data_manip.R to allow crisis dating process
+###### to use differenced spreads. Original retained for coherency.
 
-tind <- ind[,c(1,2,3)]
-tind <- spread(tind, country,  bsp)
-n <- names(tind)
+# ### Time series modelling of bsp ###
+# countries <- as.character(levels(country))
+# times <- filter(data, country == "fr")
+# acf(times$bsp)
+# ur.df(times$bsp)
+# qnorm(c(0.01, 0.05, 0.1))
+# #although can reject null for NL at 10%, others cannot be rejected
+# #conclude that series are not stationary, difference.
+# 
+# tind <- ind[,c(1,2,3)]
+# tind <- spread(tind, country,  bsp)
+# n <- names(tind)
+# 
+# for(i in 2:8){
+#   tind[,i] <- c(NA, diff(tind[,i], differences = 1))
+#   }
+# tind <- gather(tind,country,bsp, -date)
+# 
+# ind <- ind[,c(-2, -3)]
+# ind <- data.frame(tind, ind)
+# ind <- ind[,-4]
 
-for(i in 2:8){
-  tind[,i] <- c(NA, diff(tind[,i], differences = 1))
-  }
-tind <- gather(tind,country,bsp, -date)
 
-ind <- ind[,c(-2, -3)]
-ind <- data.frame(tind, ind)
-ind <- ind[,-4]
 ####### More TS testing####
-cy = "gr"
-times <- filter(ind, country = cy)
-acf(times$bsp, na.action = na.pass)
-pacf(times$bsp, na.action = na.pass)
-### ACF now well behaved, PACF less so but justification for using a few lags.
-### Can get AIC, Metiu uses 5 lags to account for within-week variation.
 
-ur.df(times[2:nrow(times), "bsp"])
-qnorm(c(0.01, 0.05, 0.1))
-## Now getting huge ADF stats, unit root removed.
+for(a in 1:7){
+  cy <- include[a]
+  times <- subset(ind, country == cy)
+  times <- times[2:nrow(times),]
+  y <- times$bsp
+  print(cy)
+  ur.df(y)
+}
 
-
-
+######### Crisis dummies
 
 crisis_1.5 <- select(ind, c(date, country, crisis_b_1.5))
 crisis_1.5 <- spread(crisis_1.5, country, crisis_b_1.5)

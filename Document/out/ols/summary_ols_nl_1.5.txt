@@ -1,0 +1,37 @@
+OLS Output: nl
+||d_1=es_b_1.5||d_2=fr_b_1.5||d_3=gr_b_1.5||d_4=ie_b_1.5||d_5=it_b_1.5||d_6=pt_b_1.5
+||i_1=es_stock||i_2=fr_stock||i_3=gr_stock||i_4=ie_stock||i_5=it_stock||i_6=pt_stock
+
+Call:
+lm(formula = bsp ~ bsp_1 + bsp_2 + bsp_3 + bsp_4 + bsp_5 + stocks + 
+    euribor + vol + d_1 + d_2 + d_3 + d_4 + d_5 + d_6, data = ready)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.04017 -0.00323 -0.00013  0.00321  0.04010 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  2.10e-03   9.23e-04    2.28  0.02280 *  
+bsp_1        2.45e+00   3.54e-02   69.25  < 2e-16 ***
+bsp_2       -3.29e+00   7.44e-02  -44.21  < 2e-16 ***
+bsp_3        2.49e+00   7.40e-02   33.57  < 2e-16 ***
+bsp_4       -9.97e-01   3.69e-02  -27.01  < 2e-16 ***
+bsp_5        1.66e-01   7.47e-03   22.22  < 2e-16 ***
+stocks      -3.82e-06   2.48e-06   -1.54  0.12396    
+euribor      8.11e-04   1.69e-04    4.79  1.8e-06 ***
+vol          7.07e-03   2.64e-03    2.68  0.00738 ** 
+d_1         -2.73e-04   9.21e-04   -0.30  0.76655    
+d_2          1.55e-03   8.35e-04    1.85  0.06382 .  
+d_3         -1.94e-03   9.47e-04   -2.05  0.04036 *  
+d_4          2.37e-03   7.86e-04    3.01  0.00264 ** 
+d_5          3.29e-03   9.83e-04    3.35  0.00083 ***
+d_6         -1.03e-03   8.85e-04   -1.16  0.24565    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.007 on 2023 degrees of freedom
+  (5 observations deleted due to missingness)
+Multiple R-squared:  0.862,	Adjusted R-squared:  0.861 
+F-statistic:  905 on 14 and 2023 DF,  p-value: <2e-16
+

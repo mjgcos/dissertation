@@ -3,6 +3,11 @@ library(dplyr)
 library(tidyr)
 library(rugarch)
 
+
+####### WARNING: Running code in entirety includes two very inefficient for loops
+####### at the end. Advise not running - they loop over 46000 observations.
+
+
 setwd("~/Academic/SGPE/Dissertation/Data/csv")
 #setwd("~/dissertation/Data/csv/")
 
@@ -116,47 +121,125 @@ clean <- mutate(clean, crisis_a = ifelse(greece_a + ireland_a + portugal_a +spai
 
 #set strength of tollerance
 
+### Added restrospectivily: Justification of differencing originally in
+### data_manip2.R but in order to generate 
+include = c("es", "fr", "gr", "ie", "it","pt", "nl", "all")
+clean <- filter(clean, country %in% include )
+
+ind <- clean[, 1:4]
+ind <- filter(ind, country != "all")
+ind2 <- filter(clean[,1:3], country == "all")
+
+### Time series modelling of bsp ###
+fname <- paste("../../Document/out/adf_test", ".txt", sep = "")
+for(a in 1:8){
+  cy <- include[a]
+  times <- subset(clean, country == cy)
+  adf <- ur.df(times$bsp)
+  result <- paste(country, "before", adf, sep=" ")
+  cat(result, file= fname, sep="\n", append=TRUE)
+}
+
+acf(times$bsp)
+ur.df(times$bsp)
+qnorm(c(0.01, 0.05, 0.1))
+#although can reject null for NL at 10%, others cannot be rejected
+#conclude that series are not stationary, difference.
+
+tind <- ind[,c(1,2,3)]
+tind <- spread(tind, country,  bsp)
+n <- names(tind)
+
+for(i in 2:8){
+  tind[,i] <- c(NA, diff(tind[,i], differences = 1))
+}
+tind <- gather(tind,country,bsp, -date)
+
+tind2 <- rbind(ind2, tind)
+
+
+
+clean2 <- clean[,c(-2, -3)]
+clean2 <- data.frame(tind2, clean2)
+clean2 <- clean2[,-4]
+
+
+# Matrix of country sd
+sds <- data.frame()
+for(i in 1:7){
+  cy <- include[i]
+  mat <- subset(clean2, country == cy)
+  sigma <- sd(mat$bsp, na.rm = TRUE)
+  sds[i,1] <- cy
+  sds[i,2] <- sigma
+}
+sds[8,1] <- "all"
+sds[8,2] <- 0
+names(sds)[c(1,2)] <- c("country", "sd")
+
+## Merge with main df
+
+clean2 <- merge(clean2, sds, by="country")
+clean2 <- clean2[,c(2,1,3:ncol(clean2))]
+
+## Loop to create crisis dummies
+c = 1.5
+clean2 <- mutate(clean2, crisis_b_1.5 = c * sd)
+clean2 <- mutate(clean2, crisis_b_1.5 = ifelse(ifelse(is.na(bsp), -1, (bsp - crisis_b_1.5)) > 0, 1, 0))
+
 c = 2
-###WARNING: Loop not optimised, inefficient computation of 46,557 obs.
-for(i in 1:nrow(clean)){
-  # Indicator variable A = s_{it} - c*s_i
-  # First calculate sd of each country
-  cy <- clean[i,2]
-  mat <- subset(clean, country == cy)
-  sigma <- sd(mat$bsp, na.rm = TRUE)
-  #Scale by tollerance
-  csigma <- c*sigma
-  #generate variabe A
-  A <- clean[i,3] - csigma
-  #Apply indicator function
-  clean[i,14] <- ifelse(A > 0, 1, 0)
-  
-  
-  print(i)
-}
-names(clean)[14] <- "crisis_b_2"
+clean2 <- mutate(clean2, crisis_b_2 = c * sd)
+clean2 <- mutate(clean2, crisis_b_2 = ifelse(ifelse(is.na(bsp), -1, (bsp - crisis_b_2)) > 0, 1, 0))
 
-c= 1.5
 
-for(i in 1:nrow(clean)){
-  # Indicator variable A = s_{it} - c*s_i
-  # First calculate sd of each country
-  cy <- clean[i,2]
-  mat <- subset(clean, country == cy)
-  sigma <- sd(mat$bsp, na.rm = TRUE)
-  #Scale by tollerance
-  csigma <- c*sigma
-  #generate variabe A
-  A <- clean[i,3] - csigma
-  #Apply indicator function
-  clean[i,15] <- ifelse(A > 0, 1, 0)
-  
-  
-  print(i)
-}
-names(clean)[15] <- "crisis_b_1.5"
+names(clean2)[15] <- "crisis_b_1.5"
+names(clean2)[16] <- "crisis_b_2"
 
-## Due to length of computation time, csv file saved and a new script started
-## see data_manip2.R
+write.csv(clean2, file = "dated.csv", row.names = FALSE)
 
-write.csv(clean, file = "dated.csv", row.names = FALSE)
+
+
+# ###WARNING: Loop not optimised, inefficient computation of 46,557 obs.
+# ### Optimised method used above
+# for(i in 1:nrow(clean)){
+#   # Indicator variable A = s_{it} - c*s_i
+#   # First calculate sd of each country
+#   cy <- clean[i,2]
+#   mat <- subset(clean, country == cy)
+#   sigma <- sd(mat$bsp, na.rm = TRUE)
+#   #Scale by tollerance
+#   csigma <- c*sigma
+#   #generate variabe A
+#   A <- clean[i,3] - csigma
+#   #Apply indicator function
+#   clean[i,14] <- ifelse(A > 0, 1, 0)
+#   
+#   
+#   print(i)
+# }
+# names(clean)[14] <- "crisis_b_2"
+# 
+# c= 1.5
+# 
+# for(i in 1:nrow(clean)){
+#   # Indicator variable A = s_{it} - c*s_i
+#   # First calculate sd of each country
+#   cy <- clean[i,2]
+#   mat <- subset(clean, country == cy)
+#   sigma <- sd(mat$bsp, na.rm = TRUE)
+#   #Scale by tollerance
+#   csigma <- c*sigma
+#   #generate variabe A
+#   A <- clean[i,3] - csigma
+#   #Apply indicator function
+#   clean[i,15] <- ifelse(A > 0, 1, 0)
+#   
+#   
+#   print(i)
+# }
+# names(clean)[15] <- "crisis_b_1.5"
+# 
+# ## Due to length of computation time, csv file saved and a new script started
+# ## see data_manip2.R
+# 
+# write.csv(clean, file = "dated.csv", row.names = FALSE)

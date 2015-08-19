@@ -4,6 +4,21 @@
 \section{Conclusion}
 \label{conclusion}
 
-This is the conclusion to the paper
+This dissertation has examined the propagation of shocks through the Eurozone during the recent crisis. In the process, it has provided a wide-ranging tour of the literature concerning the modelling and estimating contagion in financial markets, while discussing the conditions under which the coefficients of interest can be identified. The application to the Euro crisis dataset generated surprising results, and potential sources of error were suggested. The presence of a unit root in the series as a potentially key explanatory factor in determining why the results were so different from analogous papers such as \cite{metiu2012sovereign}.
+
+A major issue that arises when attempting to consistently estimate the contagion coefficient is the endogenous nature of the crisis dummies. There exist a plethora of dating strategies in the literature that attempt to avoid introducing sample selection bias to the model. In practice, this is incredibly hard to do, and as a consequence there has been no development of consensus around a single method for doing so. Here, a simple narrative based approach and a indicator function method were used to generate the dummy variables. The functional form of the indicator variable is likely to have resulted in some endogeneity entering the system, and may have contributed to the anomalous results detailed in section \ref{results}.
+
+An exposition of the canonical model of \cite{pesaran2007econometric} was presented, where theoretical justification was given for a multiple equilibria result at certain levels of fundamentals. When economic conditions in a pair of countries are positive but weak, there is no unique solution for the dependent variable, and the realisations are determined probabilistically. Using the methods outlined by Pesaran and Pick, it was demonstrated that Generalised Instrumental Variables Estimation provides a consistent estimator of the contagion coefficients, as long as they can be identified by equation-specific variables. 
+
+This condition can be somewhat restrictive, as demonstrated by the results in section \ref{results}. Country specific variables at the correct frequency that are sufficiently correlated with the crisis dummy and not with the error term in the GIVE estimation is challenging, and in the specification presented it was not possible to reject the null of weak instruments in the overwhelming majority of cases. 
+
+With no suitable instruments, alternative estimation techniques may be preferable. Section \ref{fiml} derived the FIML estimator of \cite{massacci2007identification} and detailed how it might be used to estimate contagion between country-pairs. Though it was not implemented, if the weak instrument problem cannot be resolved for GIVE then other classes of estimators should be considered. 
+
+Finding the presence of a unit root in the bond spread series was the main departure of this study from that of \cite{metiu2012sovereign}. The undifferenced series generated very high contagion coefficients, but due to the presence of a unit root, the results are spurious. The I(1) series is differenced, and the results for the regression on the stationary dependent variable are almost uniformly insignificant. Section \ref{results} catalogues the potential sources of error and limitations of the estimator, and suggests possible corrections.
+
+The paper concludes by noting that the results contained here do not constitute compelling evidence that contagion was absent during the Eurozone crisis, but raises the role of unit root analysis in models of multiple equilibria, and suggests that the weak instrument problem is challenging to resolve. The continuation of the crisis is sure to see further academic output, and solutions to these problems will be of primary importance. 
+
+
+
 
 \end{document}
