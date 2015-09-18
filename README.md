@@ -11,5 +11,5 @@ Used to store and update my dissertation R and LaTeX files.
 - [x] Further Data analysis
 - [x] Send report on progress and plan to AS
 - [x] Literature review
-- [ ] Analysis using OLS, GIVE, FIML
-- [ ] Write up
+- [x] Analysis using OLS, GIVE, FIML
+- [x] Write up
